@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "CustomizableTablesWithDeadlines.Domain/1.0.0": {
+        "runtime": {
+          "CustomizableTablesWithDeadlines.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CustomizableTablesWithDeadlines.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

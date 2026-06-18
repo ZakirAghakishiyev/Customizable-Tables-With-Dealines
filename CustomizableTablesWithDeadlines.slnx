@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CustomizableTablesWithDeadlines.Application/CustomizableTablesWithDeadlines.Application.csproj" />
+  <Project Path="CustomizableTablesWithDeadlines.Domain/CustomizableTablesWithDeadlines.Domain.csproj" />
+  <Project Path="CustomizableTablesWithDeadlines.Repository/CustomizableTablesWithDeadlines.Infrastructure.csproj" />
+  <Project Path="CustomizableTablesWithDeadlines/CustomizableTablesWithDeadlines.Presentation.csproj" />
+</Solution>
