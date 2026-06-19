@@ -9,3 +9,4 @@ c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWit
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Domain\obj\Debug\net10.0\refint\CustomizableTablesWithDeadlines.Domain.dll
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Domain\obj\Debug\net10.0\CustomizableTablesWithDeadlines.Domain.pdb
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Domain\obj\Debug\net10.0\ref\CustomizableTablesWithDeadlines.Domain.dll
+C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Domain\obj\Debug\net10.0\CustomizableTablesWithDeadlines.Domain.sourcelink.json

@@ -3,39 +3,49 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{05FA2AC4-60AB-4220-AE3E-9E198D78FFDC}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{05FA2AC4-60AB-4220-AE3E-9E198D78FFDC}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|solutionrelative:customizabletableswithdeadlines\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\AppData\\Local\\Temp\\.vsdbgsrc\\345f1b4ffea311c0abebfeda746ec9589872c273d1fa5f56bf2e777f14ce7efd\\XamlReader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\AppData\\Local\\Temp\\.vsdbgsrc\\714637f58806f1b044ddbb6209911dc1e8cd889620a2a85d9d61f983ada8583d\\PropertyPathWorker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67D369CD-B8E6-246E-86C3-3F7A95A4D19D}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines\\views\\settingsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{67D369CD-B8E6-246E-86C3-3F7A95A4D19D}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|solutionrelative:customizabletableswithdeadlines\\views\\settingsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67D369CD-B8E6-246E-86C3-3F7A95A4D19D}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{67D369CD-B8E6-246E-86C3-3F7A95A4D19D}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|solutionrelative:customizabletableswithdeadlines\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{60DF83D5-8EE8-41A5-BD01-7E7D0AE621CC}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.domain\\entities\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60DF83D5-8EE8-41A5-BD01-7E7D0AE621CC}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|solutionrelative:customizabletableswithdeadlines.domain\\entities\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3E480319-28A0-38D9-75C0-52834ABC967B}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.domain\\entities\\base\\auditedentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E480319-28A0-38D9-75C0-52834ABC967B}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|solutionrelative:customizabletableswithdeadlines.domain\\entities\\base\\auditedentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{60DF83D5-8EE8-41A5-BD01-7E7D0AE621CC}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.domain\\entities\\base\\auditedentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60DF83D5-8EE8-41A5-BD01-7E7D0AE621CC}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|solutionrelative:customizabletableswithdeadlines.domain\\entities\\base\\auditedentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3E480319-28A0-38D9-75C0-52834ABC967B}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.domain\\enums\\columndatatype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E480319-28A0-38D9-75C0-52834ABC967B}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|solutionrelative:customizabletableswithdeadlines.domain\\enums\\columndatatype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{60DF83D5-8EE8-41A5-BD01-7E7D0AE621CC}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.domain\\enums\\columndatatype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60DF83D5-8EE8-41A5-BD01-7E7D0AE621CC}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|solutionrelative:customizabletableswithdeadlines.domain\\enums\\columndatatype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3E480319-28A0-38D9-75C0-52834ABC967B}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.domain\\entities\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E480319-28A0-38D9-75C0-52834ABC967B}|CustomizableTablesWithDeadlines.Domain\\CustomizableTablesWithDeadlines.Domain.csproj|solutionrelative:customizabletableswithdeadlines.domain\\entities\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{843AE7A4-CA5B-4DAD-A642-71EE716D9E37}|CustomizableTablesWithDeadlines.Application\\CustomizableTablesWithDeadlines.Application.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.application\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{843AE7A4-CA5B-4DAD-A642-71EE716D9E37}|CustomizableTablesWithDeadlines.Application\\CustomizableTablesWithDeadlines.Application.csproj|solutionrelative:customizabletableswithdeadlines.application\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{974FC6AD-F9CD-A838-ABD9-DABF9C998B21}|CustomizableTablesWithDeadlines.Application\\CustomizableTablesWithDeadlines.Application.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.application\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{974FC6AD-F9CD-A838-ABD9-DABF9C998B21}|CustomizableTablesWithDeadlines.Application\\CustomizableTablesWithDeadlines.Application.csproj|solutionrelative:customizabletableswithdeadlines.application\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5FBE9D6B-A8EC-4E76-89AE-B0E6266C1557}|CustomizableTablesWithDeadlines.Repository\\CustomizableTablesWithDeadlines.Repository.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.repository\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5FBE9D6B-A8EC-4E76-89AE-B0E6266C1557}|CustomizableTablesWithDeadlines.Repository\\CustomizableTablesWithDeadlines.Repository.csproj|solutionrelative:customizabletableswithdeadlines.repository\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{40852A09-EF03-6A2C-3F9C-F80B570B80AB}|CustomizableTablesWithDeadlines.Repository\\CustomizableTablesWithDeadlines.Infrastructure.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines.repository\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40852A09-EF03-6A2C-3F9C-F80B570B80AB}|CustomizableTablesWithDeadlines.Repository\\CustomizableTablesWithDeadlines.Infrastructure.csproj|solutionrelative:customizabletableswithdeadlines.repository\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{05FA2AC4-60AB-4220-AE3E-9E198D78FFDC}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{05FA2AC4-60AB-4220-AE3E-9E198D78FFDC}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.csproj|solutionrelative:customizabletableswithdeadlines\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{67D369CD-B8E6-246E-86C3-3F7A95A4D19D}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{67D369CD-B8E6-246E-86C3-3F7A95A4D19D}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|solutionrelative:customizabletableswithdeadlines\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{05FA2AC4-60AB-4220-AE3E-9E198D78FFDC}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{05FA2AC4-60AB-4220-AE3E-9E198D78FFDC}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.csproj|solutionrelative:customizabletableswithdeadlines\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{67D369CD-B8E6-246E-86C3-3F7A95A4D19D}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|c:\\users\\user\\source\\repos\\customizabletableswithdeadlines\\customizabletableswithdeadlines\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67D369CD-B8E6-246E-86C3-3F7A95A4D19D}|CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Presentation.csproj|solutionrelative:customizabletableswithdeadlines\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -45,46 +55,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\App.xaml",
-              "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines\\App.xaml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\App.xaml",
-              "RelativeToolTip": "CustomizableTablesWithDeadlines\\App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-06-18T21:17:02.122Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "readme.txt",
-              "DocumentMoniker": "C:\\Users\\User\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt",
-              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt",
-              "ToolTip": "C:\\Users\\User\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt",
-              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-06-18T20:44:58.387Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuditedEntity.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Domain\\Entities\\Base\\AuditedEntity.cs",
-              "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines.Domain\\Entities\\Base\\AuditedEntity.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Domain\\Entities\\Base\\AuditedEntity.cs",
-              "RelativeToolTip": "CustomizableTablesWithDeadlines.Domain\\Entities\\Base\\AuditedEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T20:36:50.652Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -95,7 +67,80 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PropertyPathWorker.cs",
+              "DocumentMoniker": "C:\\Users\\User\\AppData\\Local\\Temp\\.vsdbgsrc\\714637f58806f1b044ddbb6209911dc1e8cd889620a2a85d9d61f983ada8583d\\PropertyPathWorker.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\714637f58806f1b044ddbb6209911dc1e8cd889620a2a85d9d61f983ada8583d\\PropertyPathWorker.cs",
+              "ToolTip": "C:\\Users\\User\\AppData\\Local\\Temp\\.vsdbgsrc\\714637f58806f1b044ddbb6209911dc1e8cd889620a2a85d9d61f983ada8583d\\PropertyPathWorker.cs [Read Only]",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\714637f58806f1b044ddbb6209911dc1e8cd889620a2a85d9d61f983ada8583d\\PropertyPathWorker.cs [Read Only]",
+              "ViewState": "AgIAAI4EAAAAAAAAAAApwJ4EAAAEAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-18T21:50:35.404Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "XamlReader.cs",
+              "DocumentMoniker": "C:\\Users\\User\\AppData\\Local\\Temp\\.vsdbgsrc\\345f1b4ffea311c0abebfeda746ec9589872c273d1fa5f56bf2e777f14ce7efd\\XamlReader.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\345f1b4ffea311c0abebfeda746ec9589872c273d1fa5f56bf2e777f14ce7efd\\XamlReader.cs",
+              "ToolTip": "C:\\Users\\User\\AppData\\Local\\Temp\\.vsdbgsrc\\345f1b4ffea311c0abebfeda746ec9589872c273d1fa5f56bf2e777f14ce7efd\\XamlReader.cs",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\345f1b4ffea311c0abebfeda746ec9589872c273d1fa5f56bf2e777f14ce7efd\\XamlReader.cs",
+              "ViewState": "AgIAAIkBAAAAAAAAAAApwKgBAAACAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-18T21:49:49.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SettingsView.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\Views\\SettingsView.xaml",
+              "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines\\Views\\SettingsView.xaml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\Views\\SettingsView.xaml",
+              "RelativeToolTip": "CustomizableTablesWithDeadlines\\Views\\SettingsView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-06-18T21:41:14.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\App.xaml",
+              "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines\\App.xaml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\App.xaml",
+              "RelativeToolTip": "CustomizableTablesWithDeadlines\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-06-18T21:17:02.122Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\User\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt",
+              "ToolTip": "C:\\Users\\User\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\modernwpfui\\0.9.6\\readme.txt",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-06-18T20:44:58.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuditedEntity.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Domain\\Entities\\Base\\AuditedEntity.cs",
+              "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines.Domain\\Entities\\Base\\AuditedEntity.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Domain\\Entities\\Base\\AuditedEntity.cs",
+              "RelativeToolTip": "CustomizableTablesWithDeadlines.Domain\\Entities\\Base\\AuditedEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-18T20:36:50.652Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "ColumnDataType.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Domain\\Enums\\ColumnDataType.cs",
               "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines.Domain\\Enums\\ColumnDataType.cs",
@@ -103,12 +148,11 @@
               "RelativeToolTip": "CustomizableTablesWithDeadlines.Domain\\Enums\\ColumnDataType.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T20:35:03.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-18T20:35:03.705Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Table.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Domain\\Entities\\Table.cs",
               "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines.Domain\\Entities\\Table.cs",
@@ -116,12 +160,11 @@
               "RelativeToolTip": "CustomizableTablesWithDeadlines.Domain\\Entities\\Table.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T20:33:22.767Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-18T20:33:22.767Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Application\\Class1.cs",
               "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines.Application\\Class1.cs",
@@ -129,12 +172,11 @@
               "RelativeToolTip": "CustomizableTablesWithDeadlines.Application\\Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T20:31:45.467Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-18T20:31:45.467Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines.Repository\\Class1.cs",
               "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines.Repository\\Class1.cs",
@@ -142,24 +184,22 @@
               "RelativeToolTip": "CustomizableTablesWithDeadlines.Repository\\Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T20:31:27.138Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-18T20:31:27.138Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\MainWindow.xaml",
               "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines\\MainWindow.xaml",
               "ToolTip": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\MainWindow.xaml",
               "RelativeToolTip": "CustomizableTablesWithDeadlines\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-06-18T20:24:24.755Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-18T20:24:24.755Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\CustomizableTablesWithDeadlines\\CustomizableTablesWithDeadlines\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "CustomizableTablesWithDeadlines\\MainWindow.xaml.cs",
@@ -167,8 +207,7 @@
               "RelativeToolTip": "CustomizableTablesWithDeadlines\\MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T20:24:23.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-18T20:24:23.502Z"
             }
           ]
         }

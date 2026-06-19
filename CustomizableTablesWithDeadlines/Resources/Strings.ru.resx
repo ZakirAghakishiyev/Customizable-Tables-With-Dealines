@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Dashboard" xml:space="preserve"><value>Панель управления</value></data>
+  <data name="Tables" xml:space="preserve"><value>Таблицы</value></data>
+  <data name="Deadlines" xml:space="preserve"><value>Сроки</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Настройки уведомлений</value></data>
+  <data name="Settings" xml:space="preserve"><value>Настройки</value></data>
+  <data name="CreateNewTable" xml:space="preserve"><value>Создать новую таблицу</value></data>
+  <data name="AddColumn" xml:space="preserve"><value>Добавить столбец</value></data>
+  <data name="AddRow" xml:space="preserve"><value>Добавить строку</value></data>
+  <data name="Save" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Delete" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Edit" xml:space="preserve"><value>Редактировать</value></data>
+  <data name="Language" xml:space="preserve"><value>Язык</value></data>
+  <data name="AppTitle" xml:space="preserve"><value>Менеджер сроков</value></data>
+  <data name="TotalTables" xml:space="preserve"><value>Всего таблиц</value></data>
+  <data name="TotalRows" xml:space="preserve"><value>Всего строк</value></data>
+  <data name="UpcomingDeadlines" xml:space="preserve"><value>Предстоящие сроки</value></data>
+  <data name="OverdueDeadlines" xml:space="preserve"><value>Просроченные сроки</value></data>
+  <data name="NearestUpcomingDeadlines" xml:space="preserve"><value>Ближайшие сроки</value></data>
+  <data name="Open" xml:space="preserve"><value>Открыть</value></data>
+  <data name="RenameTable" xml:space="preserve"><value>Переименовать таблицу</value></data>
+  <data name="DeleteTable" xml:space="preserve"><value>Удалить таблицу</value></data>
+  <data name="Columns" xml:space="preserve"><value>Столбцы</value></data>
+  <data name="Rows" xml:space="preserve"><value>Строки</value></data>
+  <data name="LastUpdated" xml:space="preserve"><value>Последнее обновление</value></data>
+  <data name="RenameColumn" xml:space="preserve"><value>Переименовать столбец</value></data>
+  <data name="DeleteColumn" xml:space="preserve"><value>Удалить столбец</value></data>
+  <data name="MoveColumnLeft" xml:space="preserve"><value>Сдвинуть влево</value></data>
+  <data name="MoveColumnRight" xml:space="preserve"><value>Сдвинуть вправо</value></data>
+  <data name="ColumnType" xml:space="preserve"><value>Тип столбца</value></data>
+  <data name="Text" xml:space="preserve"><value>Текст</value></data>
+  <data name="Number" xml:space="preserve"><value>Число</value></data>
+  <data name="DateTime" xml:space="preserve"><value>Дата/Время</value></data>
+  <data name="Boolean" xml:space="preserve"><value>Логический</value></data>
+  <data name="ManageDeadlines" xml:space="preserve"><value>Управление сроками</value></data>
+  <data name="DeleteRow" xml:space="preserve"><value>Удалить строку</value></data>
+  <data name="TableName" xml:space="preserve"><value>Название таблицы</value></data>
+  <data name="RowInfo" xml:space="preserve"><value>Информация о строке</value></data>
+  <data name="DeadlineTitle" xml:space="preserve"><value>Название срока</value></data>
+  <data name="DeadlineDateTime" xml:space="preserve"><value>Дата и время срока</value></data>
+  <data name="RemainingTime" xml:space="preserve"><value>Оставшееся время</value></data>
+  <data name="Status" xml:space="preserve"><value>Статус</value></data>
+  <data name="FilterAll" xml:space="preserve"><value>Все</value></data>
+  <data name="FilterToday" xml:space="preserve"><value>Сегодня</value></data>
+  <data name="FilterThisWeek" xml:space="preserve"><value>На этой неделе</value></data>
+  <data name="FilterOverdue" xml:space="preserve"><value>Просроченные</value></data>
+  <data name="StatusUpcoming" xml:space="preserve"><value>Предстоящий</value></data>
+  <data name="StatusDueSoon" xml:space="preserve"><value>Скоро</value></data>
+  <data name="StatusOverdue" xml:space="preserve"><value>Просрочен</value></data>
+  <data name="StatusCompleted" xml:space="preserve"><value>Завершён</value></data>
+  <data name="DefaultNotifyBefore" xml:space="preserve"><value>Уведомлять по умолчанию за</value></data>
+  <data name="EnableDesktopNotifications" xml:space="preserve"><value>Включить уведомления на рабочем столе</value></data>
+  <data name="EnableSound" xml:space="preserve"><value>Включить звук</value></data>
+  <data name="StartWithWindows" xml:space="preserve"><value>Запускать с Windows</value></data>
+  <data name="Theme" xml:space="preserve"><value>Тема</value></data>
+  <data name="ThemePlaceholder" xml:space="preserve"><value>Светлая (скоро больше тем)</value></data>
+  <data name="BackupExport" xml:space="preserve"><value>Резервная копия / Экспорт</value></data>
+  <data name="BackupExportPlaceholder" xml:space="preserve"><value>Экспорт данных (скоро)</value></data>
+  <data name="About" xml:space="preserve"><value>О программе</value></data>
+  <data name="AboutDescription" xml:space="preserve"><value>Локальный менеджер сроков и таблиц. Организуйте данные с настраиваемыми таблицами и не пропускайте сроки.</value></data>
+  <data name="English" xml:space="preserve"><value>English</value></data>
+  <data name="Azerbaijani" xml:space="preserve"><value>Azərbaycan dili</value></data>
+  <data name="Russian" xml:space="preserve"><value>Русский</value></data>
+  <data name="AddDeadline" xml:space="preserve"><value>Добавить срок</value></data>
+  <data name="EditDeadline" xml:space="preserve"><value>Редактировать срок</value></data>
+  <data name="DeleteDeadline" xml:space="preserve"><value>Удалить срок</value></data>
+  <data name="NotificationBefore" xml:space="preserve"><value>Уведомление до срока</value></data>
+  <data name="TenMinutes" xml:space="preserve"><value>За 10 минут</value></data>
+  <data name="ThirtyMinutes" xml:space="preserve"><value>За 30 минут</value></data>
+  <data name="OneHour" xml:space="preserve"><value>За 1 час</value></data>
+  <data name="ThreeHours" xml:space="preserve"><value>За 3 часа</value></data>
+  <data name="OneDay" xml:space="preserve"><value>За 1 день</value></data>
+  <data name="CustomMinutes" xml:space="preserve"><value>Произвольные минуты</value></data>
+  <data name="EnterName" xml:space="preserve"><value>Введите название</value></data>
+  <data name="ConfirmDelete" xml:space="preserve"><value>Вы уверены, что хотите удалить этот элемент?</value></data>
+  <data name="TableEditor" xml:space="preserve"><value>Редактор таблицы</value></data>
+  <data name="BackToTables" xml:space="preserve"><value>Назад к таблицам</value></data>
+  <data name="NoTablesYet" xml:space="preserve"><value>Таблиц пока нет. Создайте первую таблицу для начала.</value></data>
+  <data name="NoDeadlinesYet" xml:space="preserve"><value>Сроки не найдены.</value></data>
+  <data name="SelectTable" xml:space="preserve"><value>Выберите таблицу</value></data>
+  <data name="SelectColumn" xml:space="preserve"><value>Выберите столбец</value></data>
+  <data name="SelectDeadline" xml:space="preserve"><value>Выберите срок</value></data>
+  <data name="Version" xml:space="preserve"><value>Версия 1.0.0</value></data>
+  <data name="WelcomeSubtitle" xml:space="preserve"><value>Управляйте таблицами и сроками в одном месте</value></data>
+  <data name="Actions" xml:space="preserve"><value>Действия</value></data>
+  <data name="General" xml:space="preserve"><value>Общие</value></data>
+  <data name="Appearance" xml:space="preserve"><value>Внешний вид</value></data>
+  <data name="Data" xml:space="preserve"><value>Данные</value></data>
+  <data name="ImportFromWord" xml:space="preserve"><value>Импорт из Word</value></data>
+  <data name="Import" xml:space="preserve"><value>Импорт</value></data>
+  <data name="WordDocumentFilter" xml:space="preserve"><value>Документы Word (*.docx)|*.docx</value></data>
+  <data name="NoTablesFoundInWord" xml:space="preserve"><value>В выбранном документе Word таблицы не найдены.</value></data>
+  <data name="ImportWordFailed" xml:space="preserve"><value>Не удалось импортировать документ Word: {0}</value></data>
+  <data name="ImportWordPreviewDescription" xml:space="preserve"><value>Выберите таблицу для импорта. Первая строка будет использована как названия столбцов.</value></data>
+  <data name="SelectTableToImport" xml:space="preserve"><value>Выберите таблицу</value></data>
+  <data name="TablePreview" xml:space="preserve"><value>Предпросмотр</value></data>
+  <data name="SuggestedDeadlineColumns" xml:space="preserve"><value>Предлагаемые столбцы сроков</value></data>
+  <data name="SuggestedDeadlineColumnsHint" xml:space="preserve"><value>Обнаружены столбцы с датой/временем. Выберите, какие столбцы должны создавать сроки для строк при импорте.</value></data>
+  <data name="NoDeadlineColumnsDetected" xml:space="preserve"><value>Столбцы с датой/временем не обнаружены.</value></data>
+</root>

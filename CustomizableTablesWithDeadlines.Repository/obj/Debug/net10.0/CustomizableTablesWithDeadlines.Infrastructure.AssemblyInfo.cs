@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CustomizableTablesWithDeadlines.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bcc834f52cb7c0bb800a29fd3cf29d17f75ab18")]
 [assembly: System.Reflection.AssemblyProductAttribute("CustomizableTablesWithDeadlines.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CustomizableTablesWithDeadlines.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

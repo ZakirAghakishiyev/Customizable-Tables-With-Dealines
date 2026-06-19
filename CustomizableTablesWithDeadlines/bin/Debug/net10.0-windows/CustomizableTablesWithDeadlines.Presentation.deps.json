@@ -9,16 +9,26 @@
       "CustomizableTablesWithDeadlines.Presentation/1.0.0": {
         "dependencies": {
           "CommunityToolkit.Mvvm": "8.4.2",
-          "CustomizableTablesWithDeadlines.Domain": "1.0.0",
+          "DocumentFormat.OpenXml": "3.5.1",
           "Microsoft.EntityFrameworkCore": "10.0.9",
           "Microsoft.EntityFrameworkCore.Sqlite": "10.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "10.0.9",
-          "Microsoft.Extensions.DependencyInjection": "10.0.9",
           "ModernWpfUI": "0.9.6",
           "Quartz": "3.18.1"
         },
         "runtime": {
           "CustomizableTablesWithDeadlines.Presentation.dll": {}
+        },
+        "resources": {
+          "az/CustomizableTablesWithDeadlines.Presentation.resources.dll": {
+            "locale": "az"
+          },
+          "en/CustomizableTablesWithDeadlines.Presentation.resources.dll": {
+            "locale": "en"
+          },
+          "ru/CustomizableTablesWithDeadlines.Presentation.resources.dll": {
+            "locale": "ru"
+          }
         }
       },
       "CommunityToolkit.Mvvm/8.4.2": {
@@ -26,6 +36,25 @@
           "lib/net8.0/CommunityToolkit.Mvvm.dll": {
             "assemblyVersion": "8.4.0.0",
             "fileVersion": "8.4.2.1"
+          }
+        }
+      },
+      "DocumentFormat.OpenXml/3.5.1": {
+        "dependencies": {
+          "DocumentFormat.OpenXml.Framework": "3.5.1"
+        },
+        "runtime": {
+          "lib/net10.0/DocumentFormat.OpenXml.dll": {
+            "assemblyVersion": "3.5.1.0",
+            "fileVersion": "3.5.1.0"
+          }
+        }
+      },
+      "DocumentFormat.OpenXml.Framework/3.5.1": {
+        "runtime": {
+          "lib/net10.0/DocumentFormat.OpenXml.Framework.dll": {
+            "assemblyVersion": "3.5.1.0",
+            "fileVersion": "3.5.1.0"
           }
         }
       },
@@ -1173,14 +1202,6 @@
             "fileVersion": "9.0.24.52809"
           }
         }
-      },
-      "CustomizableTablesWithDeadlines.Domain/1.0.0": {
-        "runtime": {
-          "CustomizableTablesWithDeadlines.Domain.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
       }
     }
   },
@@ -1196,6 +1217,20 @@
       "sha512": "sha512-WadCzGEc2U+3e20avRLng4qNtt4zoOGWrdUISqJWrHe3/FSnrYjuM5Sb4yQb09LhkBXrrI4Zt3dLKgRMbItsrg==",
       "path": "communitytoolkit.mvvm/8.4.2",
       "hashPath": "communitytoolkit.mvvm.8.4.2.nupkg.sha512"
+    },
+    "DocumentFormat.OpenXml/3.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zxdOf5VVCe/uNklbRhj8dVBzQGj3DoqkUuqOp9cAZVuN8mNYDjof1lvSQA2OQNr8Ptc9d7pbA7Azq/ReaI3FpA==",
+      "path": "documentformat.openxml/3.5.1",
+      "hashPath": "documentformat.openxml.3.5.1.nupkg.sha512"
+    },
+    "DocumentFormat.OpenXml.Framework/3.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U5txtc3ORno73xQx9Lf2gWzfaSZnZwKHfLkTAslhlew9lxe5XbUiCt0dY1fHeAf8yRqszUAe5i/+xLC9R/Xfsw==",
+      "path": "documentformat.openxml.framework/3.5.1",
+      "hashPath": "documentformat.openxml.framework.3.5.1.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
@@ -1476,11 +1511,6 @@
       "sha512": "sha512-aRZlojCCGEHDKqh43jaDgaVpYETsgd7Nx4g1zwLKMtv4iTo0627715ajEFNpEEBTgLmvZuv8K0EVxc3sM4NWJA==",
       "path": "system.composition.typedparts/9.0.0",
       "hashPath": "system.composition.typedparts.9.0.0.nupkg.sha512"
-    },
-    "CustomizableTablesWithDeadlines.Domain/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

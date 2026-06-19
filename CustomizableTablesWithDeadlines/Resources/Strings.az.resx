@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Dashboard" xml:space="preserve"><value>İdarə paneli</value></data>
+  <data name="Tables" xml:space="preserve"><value>Cədvəllər</value></data>
+  <data name="Deadlines" xml:space="preserve"><value>Son tarixlər</value></data>
+  <data name="NotificationSettings" xml:space="preserve"><value>Bildiriş ayarları</value></data>
+  <data name="Settings" xml:space="preserve"><value>Ayarlar</value></data>
+  <data name="CreateNewTable" xml:space="preserve"><value>Yeni cədvəl yarat</value></data>
+  <data name="AddColumn" xml:space="preserve"><value>Sütun əlavə et</value></data>
+  <data name="AddRow" xml:space="preserve"><value>Sətir əlavə et</value></data>
+  <data name="Save" xml:space="preserve"><value>Yadda saxla</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Ləğv et</value></data>
+  <data name="Delete" xml:space="preserve"><value>Sil</value></data>
+  <data name="Edit" xml:space="preserve"><value>Redaktə et</value></data>
+  <data name="Language" xml:space="preserve"><value>Dil</value></data>
+  <data name="AppTitle" xml:space="preserve"><value>Son tarix meneceri</value></data>
+  <data name="TotalTables" xml:space="preserve"><value>Cədvəllərin sayı</value></data>
+  <data name="TotalRows" xml:space="preserve"><value>Sətirlərin sayı</value></data>
+  <data name="UpcomingDeadlines" xml:space="preserve"><value>Yaxınlaşan son tarixlər</value></data>
+  <data name="OverdueDeadlines" xml:space="preserve"><value>Gecikmiş son tarixlər</value></data>
+  <data name="NearestUpcomingDeadlines" xml:space="preserve"><value>Ən yaxın son tarixlər</value></data>
+  <data name="Open" xml:space="preserve"><value>Aç</value></data>
+  <data name="RenameTable" xml:space="preserve"><value>Cədvəli adlandır</value></data>
+  <data name="DeleteTable" xml:space="preserve"><value>Cədvəli sil</value></data>
+  <data name="Columns" xml:space="preserve"><value>Sütunlar</value></data>
+  <data name="Rows" xml:space="preserve"><value>Sətirlər</value></data>
+  <data name="LastUpdated" xml:space="preserve"><value>Son yenilənmə</value></data>
+  <data name="RenameColumn" xml:space="preserve"><value>Sütunu adlandır</value></data>
+  <data name="DeleteColumn" xml:space="preserve"><value>Sütunu sil</value></data>
+  <data name="MoveColumnLeft" xml:space="preserve"><value>Sola köçür</value></data>
+  <data name="MoveColumnRight" xml:space="preserve"><value>Sağa köçür</value></data>
+  <data name="ColumnType" xml:space="preserve"><value>Sütun növü</value></data>
+  <data name="Text" xml:space="preserve"><value>Mətn</value></data>
+  <data name="Number" xml:space="preserve"><value>Rəqəm</value></data>
+  <data name="DateTime" xml:space="preserve"><value>Tarix/Saat</value></data>
+  <data name="Boolean" xml:space="preserve"><value>Məntiqi</value></data>
+  <data name="ManageDeadlines" xml:space="preserve"><value>Son tarixləri idarə et</value></data>
+  <data name="DeleteRow" xml:space="preserve"><value>Sətri sil</value></data>
+  <data name="TableName" xml:space="preserve"><value>Cədvəl adı</value></data>
+  <data name="RowInfo" xml:space="preserve"><value>Sətir məlumatı</value></data>
+  <data name="DeadlineTitle" xml:space="preserve"><value>Son tarix başlığı</value></data>
+  <data name="DeadlineDateTime" xml:space="preserve"><value>Son tarix vaxtı</value></data>
+  <data name="RemainingTime" xml:space="preserve"><value>Qalan vaxt</value></data>
+  <data name="Status" xml:space="preserve"><value>Status</value></data>
+  <data name="FilterAll" xml:space="preserve"><value>Hamısı</value></data>
+  <data name="FilterToday" xml:space="preserve"><value>Bu gün</value></data>
+  <data name="FilterThisWeek" xml:space="preserve"><value>Bu həftə</value></data>
+  <data name="FilterOverdue" xml:space="preserve"><value>Gecikmiş</value></data>
+  <data name="StatusUpcoming" xml:space="preserve"><value>Yaxınlaşır</value></data>
+  <data name="StatusDueSoon" xml:space="preserve"><value>Tezliklə</value></data>
+  <data name="StatusOverdue" xml:space="preserve"><value>Gecikmiş</value></data>
+  <data name="StatusCompleted" xml:space="preserve"><value>Tamamlanıb</value></data>
+  <data name="DefaultNotifyBefore" xml:space="preserve"><value>Standart xəbərdarlıq vaxtı</value></data>
+  <data name="EnableDesktopNotifications" xml:space="preserve"><value>Masaüstü bildirişlərini aktiv et</value></data>
+  <data name="EnableSound" xml:space="preserve"><value>Səsi aktiv et</value></data>
+  <data name="StartWithWindows" xml:space="preserve"><value>Windows ilə başlat</value></data>
+  <data name="Theme" xml:space="preserve"><value>Tema</value></data>
+  <data name="ThemePlaceholder" xml:space="preserve"><value>Açıq (tezliklə daha çox tema)</value></data>
+  <data name="BackupExport" xml:space="preserve"><value>Ehtiyat / İxrac</value></data>
+  <data name="BackupExportPlaceholder" xml:space="preserve"><value>Məlumatları ixrac et (tezliklə)</value></data>
+  <data name="About" xml:space="preserve"><value>Haqqında</value></data>
+  <data name="AboutDescription" xml:space="preserve"><value>Yerli masaüstü son tarix və cədvəl meneceri. Məlumatlarınızı fərdiləşdirilə bilən cədvəllərlə təşkil edin və heç bir son tarixi qaçırmayın.</value></data>
+  <data name="English" xml:space="preserve"><value>English</value></data>
+  <data name="Azerbaijani" xml:space="preserve"><value>Azərbaycan dili</value></data>
+  <data name="Russian" xml:space="preserve"><value>Русский</value></data>
+  <data name="AddDeadline" xml:space="preserve"><value>Son tarix əlavə et</value></data>
+  <data name="EditDeadline" xml:space="preserve"><value>Son tarixi redaktə et</value></data>
+  <data name="DeleteDeadline" xml:space="preserve"><value>Son tarixi sil</value></data>
+  <data name="NotificationBefore" xml:space="preserve"><value>Son tarixdən əvvəl bildiriş</value></data>
+  <data name="TenMinutes" xml:space="preserve"><value>10 dəqiqə əvvəl</value></data>
+  <data name="ThirtyMinutes" xml:space="preserve"><value>30 dəqiqə əvvəl</value></data>
+  <data name="OneHour" xml:space="preserve"><value>1 saat əvvəl</value></data>
+  <data name="ThreeHours" xml:space="preserve"><value>3 saat əvvəl</value></data>
+  <data name="OneDay" xml:space="preserve"><value>1 gün əvvəl</value></data>
+  <data name="CustomMinutes" xml:space="preserve"><value>Fərdi dəqiqələr</value></data>
+  <data name="EnterName" xml:space="preserve"><value>Ad daxil edin</value></data>
+  <data name="ConfirmDelete" xml:space="preserve"><value>Bu elementi silmək istədiyinizə əminsiniz?</value></data>
+  <data name="TableEditor" xml:space="preserve"><value>Cədvəl redaktoru</value></data>
+  <data name="BackToTables" xml:space="preserve"><value>Cədvəllərə qayıt</value></data>
+  <data name="NoTablesYet" xml:space="preserve"><value>Hələ cədvəl yoxdur. Başlamaq üçün ilk cədvəlinizi yaradın.</value></data>
+  <data name="NoDeadlinesYet" xml:space="preserve"><value>Son tarix tapılmadı.</value></data>
+  <data name="SelectTable" xml:space="preserve"><value>Cədvəl seçin</value></data>
+  <data name="SelectColumn" xml:space="preserve"><value>Sütun seçin</value></data>
+  <data name="SelectDeadline" xml:space="preserve"><value>Son tarix seçin</value></data>
+  <data name="Version" xml:space="preserve"><value>Versiya 1.0.0</value></data>
+  <data name="WelcomeSubtitle" xml:space="preserve"><value>Cədvəllərinizi və son tarixlərinizi bir yerdə idarə edin</value></data>
+  <data name="Actions" xml:space="preserve"><value>Əməliyyatlar</value></data>
+  <data name="General" xml:space="preserve"><value>Ümumi</value></data>
+  <data name="Appearance" xml:space="preserve"><value>Görünüş</value></data>
+  <data name="Data" xml:space="preserve"><value>Məlumat</value></data>
+  <data name="ImportFromWord" xml:space="preserve"><value>Word-dan idxal et</value></data>
+  <data name="Import" xml:space="preserve"><value>Idxal et</value></data>
+  <data name="WordDocumentFilter" xml:space="preserve"><value>Word sənədləri (*.docx)|*.docx</value></data>
+  <data name="NoTablesFoundInWord" xml:space="preserve"><value>Seçilmiş Word sənədində cədvəl tapılmadı.</value></data>
+  <data name="ImportWordFailed" xml:space="preserve"><value>Word sənədinin idxalı uğursuz oldu: {0}</value></data>
+  <data name="ImportWordPreviewDescription" xml:space="preserve"><value>Idxal etmək üçün cədvəl seçin. İlk sətir sütun adları kimi istifadə olunacaq.</value></data>
+  <data name="SelectTableToImport" xml:space="preserve"><value>Cədvəl seçin</value></data>
+  <data name="TablePreview" xml:space="preserve"><value>Ön baxış</value></data>
+  <data name="SuggestedDeadlineColumns" xml:space="preserve"><value>Təklif olunan son tarix sütunları</value></data>
+  <data name="SuggestedDeadlineColumnsHint" xml:space="preserve"><value>Sənəddə tarix/vaxt sütunları aşkar edildi. İdxal zamanı hansı sütunların sətir son tarixləri yaratması lazım olduğunu seçin.</value></data>
+  <data name="NoDeadlineColumnsDetected" xml:space="preserve"><value>Heç bir tarix/vaxt sütunu aşkar edilmədi.</value></data>
+</root>

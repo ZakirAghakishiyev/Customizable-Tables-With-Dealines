@@ -1,5 +1,11 @@
-﻿C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows\GeneratedInternalTypeHelper.g.cs
-FC:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\App.xaml;;
-FC:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Resources\DataTemplates.xaml;;
-FC:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Views\DeadlinesView.xaml;;
+﻿
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\App.xaml;;
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\MainWindow.xaml;;
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Views\DashboardView.xaml;;
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Views\DeadlinesView.xaml;;
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Views\Dialogs\DeadlineManagementDialog.xaml;;
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Views\Dialogs\InputDialog.xaml;;
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Views\NotificationSettingsView.xaml;;
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Views\SettingsView.xaml;;
+Fc:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\Views\TableEditorView.xaml;;
 

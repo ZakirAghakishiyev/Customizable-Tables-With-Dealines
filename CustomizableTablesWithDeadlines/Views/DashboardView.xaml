@@ -1,0 +1,72 @@
+<UserControl x:Class="CustomizableTablesWithDeadlines.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CustomizableTablesWithDeadlines.Converters">
+    <UserControl.Resources>
+        <conv:DeadlineStatusToBrushConverter x:Key="StatusBrush" />
+        <conv:DeadlineStatusToTextConverter x:Key="StatusToText" />
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="{StaticResource PagePadding}">
+            <TextBlock Text="{Binding Strings.WelcomeSubtitle}" Style="{StaticResource MutedText}" Margin="0,0,0,20" />
+
+            <UniformGrid Columns="4" Margin="0,0,0,24">
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,12,0">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Strings.TotalTables}" Style="{StaticResource MutedText}" />
+                        <TextBlock Text="{Binding TotalTables}" FontSize="32" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}" Margin="0,8,0,0" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,12,0">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Strings.TotalRows}" Style="{StaticResource MutedText}" />
+                        <TextBlock Text="{Binding TotalRows}" FontSize="32" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}" Margin="0,8,0,0" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,12,0">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Strings.UpcomingDeadlines}" Style="{StaticResource MutedText}" />
+                        <TextBlock Text="{Binding UpcomingDeadlinesCount}" FontSize="32" FontWeight="Bold" Foreground="{StaticResource SuccessBrush}" Margin="0,8,0,0" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Strings.OverdueDeadlines}" Style="{StaticResource MutedText}" />
+                        <TextBlock Text="{Binding OverdueDeadlinesCount}" FontSize="32" FontWeight="Bold" Foreground="{StaticResource DangerBrush}" Margin="0,8,0,0" />
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <TextBlock Text="{Binding Strings.NearestUpcomingDeadlines}" Style="{StaticResource SectionTitle}" />
+            <Border Style="{StaticResource CardBorder}">
+                <ItemsControl ItemsSource="{Binding NearestDeadlines}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1" Padding="0,12">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+                                        <TextBlock Text="{Binding TableName}" Style="{StaticResource MutedText}" />
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding RowInfo}" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="2" Text="{Binding DeadlineDateTime, StringFormat=g}" VerticalAlignment="Center" />
+                                    <Border Grid.Column="3" CornerRadius="12" Padding="10,4" VerticalAlignment="Center"
+                                            Background="{Binding Status, Converter={StaticResource StatusBrush}}">
+                                        <TextBlock Foreground="White" FontSize="12"
+                                                   Text="{Binding Status, Converter={StaticResource StatusToText}}" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,68 @@
+<UserControl x:Class="CustomizableTablesWithDeadlines.Views.TableEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CustomizableTablesWithDeadlines.Converters">
+    <UserControl.Resources>
+        <conv:ColumnTypeToTextConverter x:Key="ColumnTypeToText" />
+    </UserControl.Resources>
+    <Grid Margin="{StaticResource PagePadding}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+            <Button Content="{Binding Strings.BackToTables}" Style="{StaticResource SecondaryButton}" Margin="0,0,12,0"
+                    Command="{Binding BackToTablesCommand}" />
+            <TextBox Text="{Binding TableName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBox}"
+                     MinWidth="280" FontSize="18" FontWeight="SemiBold" />
+            <Button Content="{Binding Strings.Save}" Style="{StaticResource PrimaryButton}" Margin="12,0,0,0"
+                    Command="{Binding SaveCommand}" />
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,12">
+            <StackPanel>
+                <TextBlock Text="{Binding Strings.Columns}" Style="{StaticResource SectionTitle}" />
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <Button Content="{Binding Strings.AddColumn}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                            Command="{Binding AddColumnCommand}" />
+                    <Button Content="{Binding Strings.RenameColumn}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                            Command="{Binding RenameColumnCommand}" />
+                    <Button Content="{Binding Strings.DeleteColumn}" Style="{StaticResource DangerButton}" Margin="0,0,8,0"
+                            Command="{Binding DeleteColumnCommand}" />
+                    <Button Content="{Binding Strings.MoveColumnLeft}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                            Command="{Binding MoveColumnLeftCommand}" />
+                    <Button Content="{Binding Strings.MoveColumnRight}" Style="{StaticResource SecondaryButton}" Margin="0,0,16,0"
+                            Command="{Binding MoveColumnRightCommand}" />
+                    <TextBlock Text="{Binding Strings.ColumnType}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <ComboBox ItemsSource="{Binding Source={x:Static conv:ColumnTypeValues.All}}"
+                              SelectedItem="{Binding SelectedColumnType}"
+                              Style="{StaticResource ModernComboBox}" Width="140" Margin="0,0,8,0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource ColumnTypeToText}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Content="{Binding Strings.Edit}" Style="{StaticResource SecondaryButton}"
+                            Command="{Binding ChangeColumnTypeCommand}" />
+                </StackPanel>
+                <ListBox ItemsSource="{Binding Columns}" SelectedItem="{Binding SelectedColumn}"
+                         DisplayMemberPath="Name" MinHeight="60" MaxHeight="100" />
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,12">
+            <Button Content="{Binding Strings.AddRow}" Style="{StaticResource PrimaryButton}" Margin="0,0,8,0"
+                    Command="{Binding AddRowCommand}" />
+        </StackPanel>
+
+        <Border Grid.Row="3" Style="{StaticResource CardBorder}" Padding="0">
+            <DataGrid x:Name="DataGrid"
+                      ItemsSource="{Binding GridData}"
+                      Margin="0" />
+        </Border>
+    </Grid>
+</UserControl>

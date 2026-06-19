@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WİNDOWS7_0_OR_GREATER
 C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\App.xaml
-15-1317591270
+13-1093497294
 
-4395950489
-229-1628938292
-MainWindow.xaml;Resources\Colors.xaml;Resources\DataTemplates.xaml;Resources\Strings.az.xaml;Resources\Strings.en.xaml;Resources\Strings.ru.xaml;Resources\Styles.xaml;Views\DashboardView.xaml;Views\DeadlinesView.xaml;Views\Dialogs\DeadlineManagementDialog.xaml;Views\Dialogs\InputDialog.xaml;Views\NotificationSettingsView.xaml;Views\SettingsView.xaml;Views\TableEditorView.xaml;Views\TablesView.xaml;
+621021431042
+230-1786665044
+MainWindow.xaml;Styles\Colors.xaml;Styles\Controls.xaml;Styles\DataGrid.xaml;Views\DashboardView.xaml;Views\DeadlinesView.xaml;Views\Dialogs\DeadlineManagementDialog.xaml;Views\Dialogs\ImportWordPreviewDialog.xaml;Views\Dialogs\InputDialog.xaml;Views\NotificationSettingsView.xaml;Views\SettingsView.xaml;Views\TableEditorView.xaml;Views\TablesView.xaml;
 
 False
 

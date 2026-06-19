@@ -1,0 +1,84 @@
+<Window x:Class="CustomizableTablesWithDeadlines.Views.Dialogs.DeadlineManagementDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:CustomizableTablesWithDeadlines.Converters"
+        Title="{Binding Strings.ManageDeadlines}"
+        Width="720" Height="560"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}">
+    <Window.Resources>
+        <conv:NotifyOptionToTextConverter x:Key="NotifyOptionToText" />
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,12">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
+                    <Button Content="{Binding Strings.AddDeadline}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                            Command="{Binding AddDeadlineCommand}" />
+                    <Button Content="{Binding Strings.EditDeadline}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                            Command="{Binding EditDeadlineCommand}" />
+                    <Button Content="{Binding Strings.DeleteDeadline}" Style="{StaticResource DangerButton}"
+                            Command="{Binding DeleteDeadlineCommand}" />
+                </StackPanel>
+                <ListView ItemsSource="{Binding Deadlines}" SelectedItem="{Binding SelectedDeadline}" BorderThickness="0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="{Binding Strings.DeadlineTitle}" DisplayMemberBinding="{Binding Title}" Width="200" />
+                            <GridViewColumn Header="{Binding Strings.DeadlineDateTime}" DisplayMemberBinding="{Binding DeadlineDateTime, StringFormat=g}" Width="180" />
+                            <GridViewColumn Header="{Binding Strings.NotificationBefore}" DisplayMemberBinding="{Binding NotifyBefore}" Width="180" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding Strings.DeadlineTitle}" Style="{StaticResource MutedText}" />
+                <TextBox Grid.Row="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBox}" Margin="0,4,12,12" />
+
+                <TextBlock Grid.Column="1" Text="{Binding Strings.DeadlineDateTime}" Style="{StaticResource MutedText}" />
+                <DatePicker Grid.Column="1" Grid.Row="1" SelectedDate="{Binding DeadlineDateTime}" Margin="0,4,0,12" />
+
+                <TextBlock Grid.Row="2" Text="{Binding Strings.NotificationBefore}" Style="{StaticResource MutedText}" />
+                <ComboBox Grid.Row="3" ItemsSource="{Binding NotifyOptions}" SelectedItem="{Binding NotifyBefore}"
+                          Style="{StaticResource ModernComboBox}" Margin="0,4,12,0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource NotifyOptionToText}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal"
+                            Visibility="{Binding IsCustomNotify, Converter={StaticResource BoolToVisibility}}">
+                    <TextBlock Text="{Binding Strings.CustomMinutes}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <TextBox Text="{Binding CustomNotifyMinutes}" Style="{StaticResource ModernTextBox}" Width="80" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="{Binding Strings.Cancel}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0" Click="Close_Click" />
+            <Button Content="{Binding Strings.Save}" Style="{StaticResource PrimaryButton}" Click="Save_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
