@@ -10,16 +10,4 @@ public partial class DeadlineManagementDialog : Window
         InitializeComponent();
         DataContext = viewModel;
     }
-
-    private void Save_Click(object sender, RoutedEventArgs e)
-    {
-        if (DataContext is DeadlineManagementViewModel vm)
-            vm.SaveAndCloseCommand.Execute(this);
-    }
-
-    private void Close_Click(object sender, RoutedEventArgs e)
-    {
-        DialogResult = true;
-        Close();
-    }
 }

@@ -10,4 +10,5 @@ public class DeadlineItem
     public NotifyBeforeOption NotifyBefore { get; set; } = NotifyBeforeOption.OneHour;
     public int? CustomNotifyMinutes { get; set; }
     public bool IsCompleted { get; set; }
+    public string NotifyBeforeText { get; set; } = string.Empty;
 }

@@ -28,8 +28,17 @@ public partial class DeadlinesViewModel : LocalizedViewModelBase
 
     public async Task LoadAsync()
     {
-        _allDeadlines = (await _deadlineService.GetAllDeadlinesAsync()).ToList();
-        ApplyFilter();
+        try
+        {
+            _allDeadlines = (await _deadlineService.GetAllDeadlinesAsync()).ToList();
+            ApplyFilter();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxHelper.ShowError(ex.Message);
+            _allDeadlines = [];
+            Deadlines = [];
+        }
     }
 
     partial void OnSelectedFilterChanged(DeadlineFilter value) => ApplyFilter();

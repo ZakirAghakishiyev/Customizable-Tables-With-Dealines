@@ -47,6 +47,9 @@ public class LocalizationService : ILocalizationService
 
     private void SetLanguageCore(AppLanguage language)
     {
+        if (CurrentLanguage == language)
+            return;
+
         CurrentLanguage = language;
         _culture = language switch
         {

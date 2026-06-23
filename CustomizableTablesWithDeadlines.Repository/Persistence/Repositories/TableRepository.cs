@@ -24,6 +24,7 @@ public class TableRepository : Repository<Table>, ITableRepository
 
     public Task<Table?> GetFullTableAsync(int tableId, CancellationToken cancellationToken = default) =>
         DbSet
+            .AsNoTracking()
             .Include(t => t.Columns.OrderBy(c => c.OrderIndex))
             .Include(t => t.Rows.OrderBy(r => r.OrderNumber))
                 .ThenInclude(r => r.CellValues)

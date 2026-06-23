@@ -1,6 +1,7 @@
 using CustomizableTablesWithDeadlines.Application.Abstractions.Persistence;
 using CustomizableTablesWithDeadlines.Application.Abstractions.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Quartz;
 
 namespace CustomizableTablesWithDeadlines.Infrastructure.Scheduling;
@@ -38,11 +39,13 @@ public class DeadlineNotificationJob : IJob
             await unitOfWork.Notifications.MarkAsSentAsync(notificationLogId, context.CancellationToken);
             await unitOfWork.SaveChangesAsync(context.CancellationToken);
         }
-        catch
+        catch (Exception ex)
         {
             await unitOfWork.Notifications.MarkAsFailedAsync(notificationLogId, context.CancellationToken);
             await unitOfWork.SaveChangesAsync(context.CancellationToken);
-            throw;
+
+            var logger = scope.ServiceProvider.GetService<ILogger<DeadlineNotificationJob>>();
+            logger?.LogError(ex, "Failed to send deadline notification {NotificationLogId}.", notificationLogId);
         }
     }
 }

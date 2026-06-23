@@ -36,4 +36,9 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         Expression<Func<T, bool>> predicate,
         CancellationToken cancellationToken = default) =>
         await DbSet.AsNoTracking().Where(predicate).ToListAsync(cancellationToken);
+
+    public virtual Task<T?> FindFirstAsync(
+        Expression<Func<T, bool>> predicate,
+        CancellationToken cancellationToken = default) =>
+        DbSet.FirstOrDefaultAsync(predicate, cancellationToken);
 }

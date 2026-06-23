@@ -1,3 +1,4 @@
+using CustomizableTablesWithDeadlines.Application.Abstractions.Services;
 using CustomizableTablesWithDeadlines.Localization;
 using CustomizableTablesWithDeadlines.Services;
 using CustomizableTablesWithDeadlines.Services.Adapters;
@@ -14,6 +15,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddPresentation(this IServiceCollection services)
     {
         services.AddSingleton<ILocalizationService, LocalizationService>();
+        services.AddSingleton<IDesktopNotificationFallback, WpfDesktopNotificationFallback>();
         services.AddSingleton<LocalizedStrings>(sp =>
             new LocalizedStrings(sp.GetRequiredService<ILocalizationService>()));
 
@@ -24,7 +26,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<INavigationService>(sp =>
             new NavigationService(sp, tableId =>
             {
-                var vm = ActivatorUtilities.CreateInstance<TableEditorViewModel>(sp);
+                var vm = sp.GetRequiredService<TableEditorViewModel>();
                 vm.InitializeAsync(tableId).GetAwaiter().GetResult();
                 return vm;
             }));
@@ -39,10 +41,10 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ImportViewModel>();
         services.AddTransient<DeadlineManagementViewModel>();
 
-        services.AddTransient<Func<int, DeadlineManagementViewModel>>(sp => rowId =>
+        services.AddTransient<Func<int, Task<DeadlineManagementViewModel>>>(sp => async rowId =>
         {
             var vm = ActivatorUtilities.CreateInstance<DeadlineManagementViewModel>(sp);
-            vm.Initialize(rowId);
+            await vm.InitializeAsync(rowId);
             return vm;
         });
 
@@ -51,7 +53,7 @@ public static class ServiceCollectionExtensions
             var localization = sp.GetRequiredService<ILocalizationService>();
             var tableService = sp.GetRequiredService<PresentationTableService>();
             var navigation = sp.GetRequiredService<INavigationService>();
-            var deadlineFactory = sp.GetRequiredService<Func<int, DeadlineManagementViewModel>>();
+            var deadlineFactory = sp.GetRequiredService<Func<int, Task<DeadlineManagementViewModel>>>();
             return new TableEditorViewModel(
                 localization,
                 tableService,

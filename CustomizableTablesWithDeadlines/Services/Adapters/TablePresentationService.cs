@@ -43,8 +43,14 @@ public class TablePresentationService : ITableService
     public async Task<CustomTable> CreateTableAsync(string name)
     {
         var id = await _tables.CreateAsync(new CreateTableDto { Name = name });
+        var created = new CustomTable
+        {
+            Id = id,
+            Name = name.Trim(),
+            LastUpdated = DateTime.Now
+        };
         TablesChanged?.Invoke(this, EventArgs.Empty);
-        return (await GetTableByIdAsync(id))!;
+        return created;
     }
 
     public async Task<CustomTable> ImportTableAsync(CustomTable table)
@@ -61,22 +67,26 @@ public class TablePresentationService : ITableService
             await _tables.RenameAsync(new RenameTableDto { Id = table.Id, Name = table.Name });
 
         var currentColumnIds = current.Columns.Select(c => c.Id).ToHashSet();
-        var uiColumnIds = table.Columns.Select(c => c.Id).ToHashSet();
 
-        foreach (var column in table.Columns.Where(c => c.Id == 0 || !currentColumnIds.Contains(c.Id)))
+        foreach (var column in table.Columns.Where(c => c.Id <= 0).ToList())
         {
-            await _columns.CreateAsync(new CreateColumnDto
+            var oldColumnId = column.Id;
+            var newColumnId = await _columns.CreateAsync(new CreateColumnDto
             {
                 TableId = table.Id,
                 Name = column.Name,
                 DataType = PresentationMapping.ToColumnDataType(column.Type)
             });
+            column.Id = newColumnId;
+            RemapColumnCellValues(table, oldColumnId, newColumnId);
         }
+
+        var uiColumnIds = table.Columns.Where(c => c.Id > 0).Select(c => c.Id).ToHashSet();
 
         foreach (var removedId in currentColumnIds.Except(uiColumnIds))
             await _columns.DeleteAsync(removedId);
 
-        foreach (var column in table.Columns.Where(c => currentColumnIds.Contains(c.Id)))
+        foreach (var column in table.Columns.Where(c => c.Id > 0 && currentColumnIds.Contains(c.Id)))
         {
             var existing = current.Columns.First(c => c.Id == column.Id);
             if (!string.Equals(existing.Name, column.Name, StringComparison.Ordinal))
@@ -85,26 +95,31 @@ public class TablePresentationService : ITableService
             }
         }
 
-        if (table.Columns.Count > 0)
-        {
-            await _columns.ReorderAsync(table.Columns
-                .OrderBy(c => c.Order)
-                .Select((c, index) => new ReorderColumnDto { Id = c.Id, OrderIndex = index })
-                .ToList());
-        }
+        var columnsToReorder = table.Columns
+            .Where(c => c.Id > 0)
+            .OrderBy(c => c.Order)
+            .Select((c, index) => new ReorderColumnDto { Id = c.Id, OrderIndex = index })
+            .ToList();
+
+        if (columnsToReorder.Count > 0)
+            await _columns.ReorderAsync(columnsToReorder);
 
         current = await _tables.GetByIdAsync(table.Id);
         var currentRowIds = current.Rows.Select(r => r.Id).ToHashSet();
-        var uiRowIds = table.Rows.Where(r => r.Id > 0).Select(r => r.Id).ToHashSet();
 
-        foreach (var row in table.Rows.Where(r => r.Id == 0 || !currentRowIds.Contains(r.Id)))
-            await _rows.CreateAsync(new CreateRowDto { TableId = table.Id });
+        foreach (var uiRow in table.Rows.Where(r => r.Id <= 0).ToList())
+        {
+            var newRowId = await _rows.CreateAsync(new CreateRowDto { TableId = table.Id });
+            uiRow.Id = newRowId;
+        }
+
+        var uiRowIds = table.Rows.Select(r => r.Id).ToHashSet();
 
         foreach (var removedRowId in currentRowIds.Except(uiRowIds))
             await _rows.DeleteAsync(removedRowId);
 
         current = await _tables.GetByIdAsync(table.Id);
-        foreach (var uiRow in table.Rows.Where(r => r.Id > 0))
+        foreach (var uiRow in table.Rows)
         {
             var currentRow = current.Rows.FirstOrDefault(r => r.Id == uiRow.Id);
             if (currentRow is null)
@@ -137,6 +152,18 @@ public class TablePresentationService : ITableService
     {
         await _tables.RenameAsync(new RenameTableDto { Id = id, Name = newName });
         TablesChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private static void RemapColumnCellValues(CustomTable table, int oldColumnId, int newColumnId)
+    {
+        if (oldColumnId == newColumnId)
+            return;
+
+        foreach (var row in table.Rows)
+        {
+            if (row.CellValues.Remove(oldColumnId, out var value))
+                row.CellValues[newColumnId] = value;
+        }
     }
 
     private static UpdateCellValueDto BuildCellUpdate(int rowId, int columnId, Models.Enums.ColumnType type, object? value) =>

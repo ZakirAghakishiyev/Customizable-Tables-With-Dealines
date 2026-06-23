@@ -21,7 +21,7 @@ public class DeadlineService : IDeadlineService
 
     public async Task<List<DeadlineDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        var deadlines = await _unitOfWork.Deadlines.GetAllAsync(cancellationToken);
+        var deadlines = await _unitOfWork.Deadlines.GetAllWithRowAsync(cancellationToken);
         return deadlines.Select(d => d.ToDto()).ToList();
     }
 

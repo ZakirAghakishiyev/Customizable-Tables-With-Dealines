@@ -4,6 +4,7 @@ namespace CustomizableTablesWithDeadlines.Application.Abstractions.Persistence;
 
 public interface IDeadlineRepository : IRepository<Deadline>
 {
+    Task<IReadOnlyList<Deadline>> GetAllWithRowAsync(CancellationToken cancellationToken = default);
     Task<IReadOnlyList<Deadline>> GetUpcomingDeadlinesAsync(CancellationToken cancellationToken = default);
     Task<IReadOnlyList<Deadline>> GetOverdueDeadlinesAsync(CancellationToken cancellationToken = default);
     Task<IReadOnlyList<Deadline>> GetDeadlinesByRowIdAsync(int rowId, CancellationToken cancellationToken = default);

@@ -4,6 +4,18 @@
              xmlns:conv="clr-namespace:CustomizableTablesWithDeadlines.Converters">
     <UserControl.Resources>
         <conv:ColumnTypeToTextConverter x:Key="ColumnTypeToText" />
+        <DataTemplate x:Key="RowActionsTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                        Content="{Binding DataContext.Strings.ManageDeadlines, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                        Command="{Binding DataContext.ManageDeadlinesCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                        CommandParameter="{Binding _RowId}" />
+                <Button Style="{StaticResource DangerButton}"
+                        Content="{Binding DataContext.Strings.DeleteRow, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                        Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                        CommandParameter="{Binding _RowId}" />
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid Margin="{StaticResource PagePadding}">
         <Grid.RowDefinitions>
@@ -50,7 +62,8 @@
                             Command="{Binding ChangeColumnTypeCommand}" />
                 </StackPanel>
                 <ListBox ItemsSource="{Binding Columns}" SelectedItem="{Binding SelectedColumn}"
-                         DisplayMemberPath="Name" MinHeight="60" MaxHeight="100" />
+                         DisplayMemberPath="Name" MinHeight="60" MaxHeight="100"
+                         HorizontalAlignment="Stretch" />
             </StackPanel>
         </Border>
 
@@ -59,9 +72,14 @@
                     Command="{Binding AddRowCommand}" />
         </StackPanel>
 
-        <Border Grid.Row="3" Style="{StaticResource CardBorder}" Padding="0">
+        <Border Grid.Row="3" Style="{StaticResource CardBorder}" Padding="0" HorizontalAlignment="Stretch">
             <DataGrid x:Name="DataGrid"
                       ItemsSource="{Binding GridData}"
+                      HorizontalAlignment="Stretch"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
+                      MinColumnWidth="110"
+                      RowHeight="48"
                       Margin="0" />
         </Border>
     </Grid>

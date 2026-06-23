@@ -245,3 +245,5 @@ c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWit
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows10.0.17763.0\CustomizableTablesWithDeadlines.Presentation.pdb
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows10.0.17763.0\CustomizableTablesWithDeadlines.Presentation.genruntimeconfig.cache
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows10.0.17763.0\ref\CustomizableTablesWithDeadlines.Presentation.dll
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows10.0.17763.0\Controls\DateTimeEditorControl.baml
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows10.0.17763.0\Controls\DateTimeEditorControl.g.cs

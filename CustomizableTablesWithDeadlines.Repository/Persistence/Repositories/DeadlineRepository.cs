@@ -10,11 +10,20 @@ public class DeadlineRepository : Repository<Deadline>, IDeadlineRepository
     {
     }
 
+    public async Task<IReadOnlyList<Deadline>> GetAllWithRowAsync(CancellationToken cancellationToken = default) =>
+        await DbSet
+            .AsNoTracking()
+            .Include(d => d.Row)
+            .Include(d => d.NotificationRules)
+            .OrderBy(d => d.DeadlineDateTime)
+            .ToListAsync(cancellationToken);
+
     public async Task<IReadOnlyList<Deadline>> GetUpcomingDeadlinesAsync(CancellationToken cancellationToken = default)
     {
-        var now = DateTime.UtcNow;
+        var now = DateTime.Now;
         return await DbSet
             .AsNoTracking()
+            .Include(d => d.NotificationRules)
             .Where(d => d.DeadlineDateTime >= now)
             .OrderBy(d => d.DeadlineDateTime)
             .ToListAsync(cancellationToken);
@@ -22,9 +31,10 @@ public class DeadlineRepository : Repository<Deadline>, IDeadlineRepository
 
     public async Task<IReadOnlyList<Deadline>> GetOverdueDeadlinesAsync(CancellationToken cancellationToken = default)
     {
-        var now = DateTime.UtcNow;
+        var now = DateTime.Now;
         return await DbSet
             .AsNoTracking()
+            .Include(d => d.NotificationRules)
             .Where(d => d.DeadlineDateTime < now)
             .OrderBy(d => d.DeadlineDateTime)
             .ToListAsync(cancellationToken);
@@ -33,6 +43,7 @@ public class DeadlineRepository : Repository<Deadline>, IDeadlineRepository
     public async Task<IReadOnlyList<Deadline>> GetDeadlinesByRowIdAsync(int rowId, CancellationToken cancellationToken = default) =>
         await DbSet
             .AsNoTracking()
+            .Include(d => d.NotificationRules)
             .Where(d => d.RowId == rowId)
             .OrderBy(d => d.DeadlineDateTime)
             .ToListAsync(cancellationToken);
@@ -44,7 +55,7 @@ public class DeadlineRepository : Repository<Deadline>, IDeadlineRepository
 
     public async Task<IReadOnlyList<Deadline>> GetAllActiveFutureDeadlinesAsync(CancellationToken cancellationToken = default)
     {
-        var now = DateTime.UtcNow;
+        var now = DateTime.Now;
         return await DbSet
             .Include(d => d.NotificationRules)
             .Where(d => d.DeadlineDateTime > now)

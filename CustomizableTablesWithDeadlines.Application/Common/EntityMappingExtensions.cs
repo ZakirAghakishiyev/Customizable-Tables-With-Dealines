@@ -93,7 +93,7 @@ public static class EntityMappingExtensions
         RowId = deadline.RowId,
         Title = deadline.Title,
         DeadlineDateTime = deadline.DeadlineDateTime,
-        NotificationRules = deadline.NotificationRules.Select(r => r.ToDto()).ToList()
+        NotificationRules = deadline.NotificationRules?.Select(r => r.ToDto()).ToList() ?? []
     };
 
     public static NotificationRuleDto ToDto(this NotificationRule rule) => new()

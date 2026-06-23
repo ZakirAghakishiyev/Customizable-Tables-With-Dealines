@@ -8,6 +8,7 @@ namespace CustomizableTablesWithDeadlines.ViewModels;
 public partial class MainViewModel : LocalizedViewModelBase
 {
     private readonly INavigationService _navigationService;
+    private bool _suppressSelectionNavigation;
 
     [ObservableProperty] private object? _currentView;
     [ObservableProperty] private string _pageTitle = string.Empty;
@@ -50,12 +51,23 @@ public partial class MainViewModel : LocalizedViewModelBase
         };
 
         var currentKey = SelectedNavigationItem?.Key;
-        NavigationItems = new ObservableCollection<NavigationItem>(items);
-        SelectedNavigationItem = NavigationItems.FirstOrDefault(i => i.Key == currentKey) ?? NavigationItems[0];
+        _suppressSelectionNavigation = true;
+        try
+        {
+            NavigationItems = new ObservableCollection<NavigationItem>(items);
+            SelectedNavigationItem = NavigationItems.FirstOrDefault(i => i.Key == currentKey) ?? NavigationItems[0];
+        }
+        finally
+        {
+            _suppressSelectionNavigation = false;
+        }
     }
 
     partial void OnSelectedNavigationItemChanged(NavigationItem? value)
     {
+        if (_suppressSelectionNavigation)
+            return;
+
         value?.NavigateCommand?.Execute(null);
     }
 

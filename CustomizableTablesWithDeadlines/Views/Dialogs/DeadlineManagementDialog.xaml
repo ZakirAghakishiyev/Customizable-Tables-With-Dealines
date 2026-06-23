@@ -2,8 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:conv="clr-namespace:CustomizableTablesWithDeadlines.Converters"
+        xmlns:controls="clr-namespace:CustomizableTablesWithDeadlines.Controls"
+        xmlns:loc="clr-namespace:CustomizableTablesWithDeadlines.Localization"
         Title="{Binding Strings.ManageDeadlines}"
         Width="720" Height="560"
+        MinWidth="640" MinHeight="480"
         WindowStartupLocation="CenterOwner"
         Background="{StaticResource BackgroundBrush}">
     <Window.Resources>
@@ -12,34 +15,37 @@
     </Window.Resources>
     <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,12">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
-                    <Button Content="{Binding Strings.AddDeadline}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
-                            Command="{Binding AddDeadlineCommand}" />
-                    <Button Content="{Binding Strings.EditDeadline}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
-                            Command="{Binding EditDeadlineCommand}" />
-                    <Button Content="{Binding Strings.DeleteDeadline}" Style="{StaticResource DangerButton}"
-                            Command="{Binding DeleteDeadlineCommand}" />
-                </StackPanel>
-                <ListView ItemsSource="{Binding Deadlines}" SelectedItem="{Binding SelectedDeadline}" BorderThickness="0">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="{Binding Strings.DeadlineTitle}" DisplayMemberBinding="{Binding Title}" Width="200" />
-                            <GridViewColumn Header="{Binding Strings.DeadlineDateTime}" DisplayMemberBinding="{Binding DeadlineDateTime, StringFormat=g}" Width="180" />
-                            <GridViewColumn Header="{Binding Strings.NotificationBefore}" DisplayMemberBinding="{Binding NotifyBefore}" Width="180" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </DockPanel>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+            <Button Content="{Binding Strings.AddDeadline}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                    Command="{Binding AddDeadlineCommand}" />
+            <Button Content="{Binding Strings.EditDeadline}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                    Command="{Binding EditDeadlineCommand}" />
+            <Button Content="{Binding Strings.DeleteDeadline}" Style="{StaticResource DangerButton}"
+                    Command="{Binding DeleteDeadlineCommand}" />
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}">
+            <DataGrid ItemsSource="{Binding Deadlines}"
+                      SelectedItem="{Binding SelectedDeadline}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      HorizontalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{loc:Loc Key=DeadlineTitle}" Binding="{Binding Title}" Width="*" MinWidth="160" />
+                    <DataGridTextColumn Header="{loc:Loc Key=DeadlineDateTime}" Binding="{Binding DeadlineDateTime, StringFormat=g}" Width="180" />
+                    <DataGridTextColumn Header="{loc:Loc Key=NotificationBefore}" Binding="{Binding NotifyBeforeText}" Width="180" />
+                </DataGrid.Columns>
+            </DataGrid>
         </Border>
 
-        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,12">
+        <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,12,0,12">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -56,7 +62,9 @@
                 <TextBox Grid.Row="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBox}" Margin="0,4,12,12" />
 
                 <TextBlock Grid.Column="1" Text="{Binding Strings.DeadlineDateTime}" Style="{StaticResource MutedText}" />
-                <DatePicker Grid.Column="1" Grid.Row="1" SelectedDate="{Binding DeadlineDateTime}" Margin="0,4,0,12" />
+                <controls:DateTimeEditorControl Grid.Column="1" Grid.Row="1"
+                                                Value="{Binding DeadlineDateTime, UpdateSourceTrigger=PropertyChanged}"
+                                                Margin="0,4,0,12" />
 
                 <TextBlock Grid.Row="2" Text="{Binding Strings.NotificationBefore}" Style="{StaticResource MutedText}" />
                 <ComboBox Grid.Row="3" ItemsSource="{Binding NotifyOptions}" SelectedItem="{Binding NotifyBefore}"
@@ -76,9 +84,11 @@
             </Grid>
         </Border>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="{Binding Strings.Cancel}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0" Click="Close_Click" />
-            <Button Content="{Binding Strings.Save}" Style="{StaticResource PrimaryButton}" Click="Save_Click" />
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="{Binding Strings.Cancel}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                    Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+            <Button Content="{Binding Strings.Save}" Style="{StaticResource PrimaryButton}" IsDefault="True"
+                    Command="{Binding SaveAndCloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
         </StackPanel>
     </Grid>
 </Window>

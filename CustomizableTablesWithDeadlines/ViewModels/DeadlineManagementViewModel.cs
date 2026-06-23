@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CustomizableTablesWithDeadlines.Application.Abstractions.Services;
@@ -22,7 +23,7 @@ public partial class DeadlineManagementViewModel : LocalizedViewModelBase
     [ObservableProperty] private ObservableCollection<DeadlineItem> _deadlines = [];
     [ObservableProperty] private DeadlineItem? _selectedDeadline;
     [ObservableProperty] private string _title = string.Empty;
-    [ObservableProperty] private DateTime _deadlineDateTime = DateTime.Now.AddDays(1);
+    [ObservableProperty] private DateTime? _deadlineDateTime = DateTime.Today.AddDays(1);
     [ObservableProperty] private NotifyBeforeOption _notifyBefore = NotifyBeforeOption.OneHour;
     [ObservableProperty] private int _customNotifyMinutes = 30;
     [ObservableProperty] private bool _isEditing;
@@ -40,7 +41,7 @@ public partial class DeadlineManagementViewModel : LocalizedViewModelBase
         UpdateCustomNotifyVisibility();
     }
 
-    public async void Initialize(int rowId)
+    public async Task InitializeAsync(int rowId)
     {
         _rowId = rowId;
         await LoadAsync();
@@ -49,7 +50,13 @@ public partial class DeadlineManagementViewModel : LocalizedViewModelBase
     public async Task LoadAsync()
     {
         var items = await _deadlineService.GetByRowIdAsync(_rowId);
-        Deadlines = new ObservableCollection<DeadlineItem>(items.Select(PresentationMapping.ToDeadlineItem));
+        Deadlines = new ObservableCollection<DeadlineItem>(
+            items.Select(dto =>
+            {
+                var item = PresentationMapping.ToDeadlineItem(dto);
+                item.NotifyBeforeText = Strings.GetNotifyBeforeText(item.NotifyBefore);
+                return item;
+            }));
     }
 
     partial void OnNotifyBeforeChanged(NotifyBeforeOption value) => UpdateCustomNotifyVisibility();
@@ -60,6 +67,7 @@ public partial class DeadlineManagementViewModel : LocalizedViewModelBase
     [RelayCommand]
     private void AddDeadline()
     {
+        SelectedDeadline = null;
         ClearForm();
         IsEditing = false;
     }
@@ -83,60 +91,101 @@ public partial class DeadlineManagementViewModel : LocalizedViewModelBase
         if (!MessageBoxHelper.Confirm(Strings.ConfirmDelete))
             return;
 
-        await _deadlineService.DeleteAsync(SelectedDeadline.Id);
-        await LoadAsync();
-        SelectedDeadline = null;
-        ClearForm();
+        try
+        {
+            await _deadlineService.DeleteAsync(SelectedDeadline.Id);
+            await LoadAsync();
+            SelectedDeadline = null;
+            ClearForm();
+            IsEditing = false;
+        }
+        catch (Exception ex)
+        {
+            MessageBoxHelper.ShowError(ex.Message);
+        }
     }
 
     [RelayCommand]
-    private async Task SaveDeadlineAsync()
+    private async Task SaveAndCloseAsync(Window? window)
     {
-        if (string.IsNullOrWhiteSpace(Title))
+        if (!await TrySaveAsync())
             return;
 
-        if (IsEditing && SelectedDeadline is not null)
+        if (window is not null)
         {
-            await _deadlineService.UpdateAsync(new UpdateDeadlineDto
-            {
-                Id = SelectedDeadline.Id,
-                Title = Title.Trim(),
-                DeadlineDateTime = DeadlineDateTime
-            });
+            window.DialogResult = true;
+            window.Close();
         }
-        else
-        {
-            var id = await _deadlineService.CreateAsync(new CreateDeadlineDto
-            {
-                RowId = _rowId,
-                Title = Title.Trim(),
-                DeadlineDateTime = DeadlineDateTime
-            });
-
-            await _notificationRuleService.CreateAsync(new CreateNotificationRuleDto
-            {
-                DeadlineId = id,
-                NotifyBeforeMinutes = PresentationMapping.NotifyOptionToMinutes(NotifyBefore, CustomNotifyMinutes),
-                IsEnabled = true
-            });
-        }
-
-        await LoadAsync();
-        ClearForm();
-        IsEditing = false;
     }
 
     [RelayCommand]
-    private async Task SaveAndCloseAsync(System.Windows.Window? window)
+    private void Cancel(Window? window)
     {
-        await SaveDeadlineAsync();
-        window?.Close();
+        if (window is not null)
+        {
+            window.DialogResult = false;
+            window.Close();
+        }
+    }
+
+    private async Task<bool> TrySaveAsync()
+    {
+        if (string.IsNullOrWhiteSpace(Title))
+        {
+            MessageBoxHelper.ShowError(Strings.EnterName);
+            return false;
+        }
+
+        if (DeadlineDateTime is null)
+        {
+            MessageBoxHelper.ShowError(Strings.DeadlineDateTime);
+            return false;
+        }
+
+        try
+        {
+            if (IsEditing && SelectedDeadline is not null)
+            {
+                await _deadlineService.UpdateAsync(new UpdateDeadlineDto
+                {
+                    Id = SelectedDeadline.Id,
+                    Title = Title.Trim(),
+                    DeadlineDateTime = DeadlineDateTime.Value
+                });
+            }
+            else
+            {
+                var id = await _deadlineService.CreateAsync(new CreateDeadlineDto
+                {
+                    RowId = _rowId,
+                    Title = Title.Trim(),
+                    DeadlineDateTime = DeadlineDateTime.Value
+                });
+
+                await _notificationRuleService.CreateAsync(new CreateNotificationRuleDto
+                {
+                    DeadlineId = id,
+                    NotifyBeforeMinutes = PresentationMapping.NotifyOptionToMinutes(NotifyBefore, CustomNotifyMinutes),
+                    IsEnabled = true
+                });
+            }
+
+            await LoadAsync();
+            ClearForm();
+            IsEditing = false;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            MessageBoxHelper.ShowError(ex.Message);
+            return false;
+        }
     }
 
     private void ClearForm()
     {
         Title = string.Empty;
-        DeadlineDateTime = DateTime.Now.AddDays(1);
+        DeadlineDateTime = DateTime.Today.AddDays(1);
         NotifyBefore = NotifyBeforeOption.OneHour;
         CustomNotifyMinutes = 30;
     }

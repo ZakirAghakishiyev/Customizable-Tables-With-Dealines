@@ -28,6 +28,11 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{StaticResource CardBorder}" Width="320" Margin="0,0,16,16">
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"
+                                              Command="{Binding DataContext.SelectTableCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                              CommandParameter="{Binding}" />
+                            </Border.InputBindings>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -57,6 +62,10 @@
                                     <Button Content="{Binding DataContext.Strings.Open, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             Style="{StaticResource PrimaryButton}" Margin="0,0,8,0"
                                             Command="{Binding DataContext.OpenTableCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" />
+                                    <Button Content="{Binding DataContext.Strings.RenameTable, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                                            Command="{Binding DataContext.RenameTableItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             CommandParameter="{Binding}" />
                                     <Button Content="{Binding DataContext.Strings.Delete, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             Style="{StaticResource DangerButton}"

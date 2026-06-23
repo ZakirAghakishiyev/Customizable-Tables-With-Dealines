@@ -22,7 +22,6 @@ public partial class TablesViewModel : LocalizedViewModelBase
     {
         _tableService = tableService;
         _navigationService = navigationService;
-        _tableService.TablesChanged += async (_, _) => await LoadAsync();
     }
 
     public async Task LoadAsync()
@@ -35,18 +34,26 @@ public partial class TablesViewModel : LocalizedViewModelBase
     private void ImportFromWord() => _navigationService.NavigateTo<ImportViewModel>();
 
     [RelayCommand]
+    private void SelectTable(CustomTable? table)
+    {
+        SelectedTable = table;
+    }
+
+    [RelayCommand]
     private async Task CreateTableAsync()
     {
-        var dialog = new InputDialog(Strings.CreateNewTable, Strings.TableName)
-        {
-            Owner = System.Windows.Application.Current.MainWindow
-        };
-
-        if (dialog.ShowDialog() != true || string.IsNullOrWhiteSpace(dialog.InputText))
+        if (!InputDialog.TryPrompt(Strings.CreateNewTable, Strings.TableName, out var name))
             return;
 
-        await _tableService.CreateTableAsync(dialog.InputText.Trim());
-        await LoadAsync();
+        try
+        {
+            await _tableService.CreateTableAsync(name);
+            await LoadAsync();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxHelper.ShowError(ex.Message);
+        }
     }
 
     [RelayCommand]
@@ -60,18 +67,29 @@ public partial class TablesViewModel : LocalizedViewModelBase
     private async Task RenameTableAsync()
     {
         if (SelectedTable is null) return;
+        await RenameTableItemAsync(SelectedTable);
+    }
 
-        var dialog = new InputDialog(Strings.RenameTable, Strings.TableName, SelectedTable.Name)
-        {
-            Owner = System.Windows.Application.Current.MainWindow
-        };
+    [RelayCommand]
+    private async Task RenameTableItemAsync(CustomTable? table)
+    {
+        if (table is null) return;
 
-        if (dialog.ShowDialog() != true || string.IsNullOrWhiteSpace(dialog.InputText))
+        if (!InputDialog.TryPrompt(Strings.RenameTable, Strings.TableName, out var newName, table.Name))
             return;
 
-        SelectedTable.Name = dialog.InputText.Trim();
-        await _tableService.UpdateTableAsync(SelectedTable);
-        await LoadAsync();
+        if (string.Equals(table.Name, newName, StringComparison.Ordinal))
+            return;
+
+        try
+        {
+            await _tableService.RenameTableAsync(table.Id, newName);
+            await LoadAsync();
+        }
+        catch (Exception ex)
+        {
+            MessageBoxHelper.ShowError(ex.Message);
+        }
     }
 
     [RelayCommand]

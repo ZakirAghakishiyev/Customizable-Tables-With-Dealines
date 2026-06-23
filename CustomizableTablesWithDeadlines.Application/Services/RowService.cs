@@ -57,11 +57,10 @@ public class RowService : IRowService
         var column = await _unitOfWork.Columns.GetByIdAsync(dto.ColumnId, cancellationToken)
                      ?? throw new NotFoundException(nameof(Column), dto.ColumnId);
 
-        var cells = await _unitOfWork.CellValues.FindAsync(
+        var cell = await _unitOfWork.CellValues.FindFirstAsync(
             c => c.RowId == dto.RowId && c.ColumnId == dto.ColumnId,
             cancellationToken);
 
-        var cell = cells.FirstOrDefault();
         if (cell is null)
         {
             cell = new CellValue
@@ -75,7 +74,6 @@ public class RowService : IRowService
         else
         {
             CellValueValidator.ApplyValue(cell, column.DataType, dto);
-            _unitOfWork.CellValues.Update(cell);
         }
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);

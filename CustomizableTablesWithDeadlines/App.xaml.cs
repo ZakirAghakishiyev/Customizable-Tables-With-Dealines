@@ -3,6 +3,7 @@ using CustomizableTablesWithDeadlines.Application;
 using CustomizableTablesWithDeadlines.Application.Abstractions.Infrastructure;
 using CustomizableTablesWithDeadlines.Application.Abstractions.Services;
 using CustomizableTablesWithDeadlines.Infrastructure;
+using CustomizableTablesWithDeadlines.Infrastructure.Notifications;
 using CustomizableTablesWithDeadlines.Localization;
 using CustomizableTablesWithDeadlines.Services.Interfaces;
 using CustomizableTablesWithDeadlines.ViewModels;
@@ -15,6 +16,9 @@ namespace CustomizableTablesWithDeadlines;
 
 public partial class App : WpfApplication
 {
+    private static ServiceProvider? _rootProvider;
+    private static IServiceScope? _appScope;
+
     public static IServiceProvider Services { get; private set; } = null!;
 
     public static ILocalizationService Localization => GetService<ILocalizationService>();
@@ -23,6 +27,15 @@ public partial class App : WpfApplication
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+
+        try
+        {
+            WindowsToastRegistration.Register();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Toast registration failed: {ex}");
+        }
 
         var configuration = new ConfigurationBuilder().Build();
         var serviceCollection = new ServiceCollection();
@@ -33,7 +46,9 @@ public partial class App : WpfApplication
         serviceCollection.AddInfrastructure(configuration);
         serviceCollection.AddPresentation();
 
-        Services = serviceCollection.BuildServiceProvider();
+        _rootProvider = serviceCollection.BuildServiceProvider();
+        _appScope = _rootProvider.CreateScope();
+        Services = _appScope.ServiceProvider;
 
         try
         {
@@ -70,4 +85,11 @@ public partial class App : WpfApplication
 
     public static T GetService<T>() where T : class =>
         Services.GetRequiredService<T>();
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        _appScope?.Dispose();
+        _rootProvider?.Dispose();
+        base.OnExit(e);
+    }
 }

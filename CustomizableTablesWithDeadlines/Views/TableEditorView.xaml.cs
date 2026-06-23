@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using CustomizableTablesWithDeadlines.Controls;
 using CustomizableTablesWithDeadlines.Models.Enums;
 using CustomizableTablesWithDeadlines.ViewModels;
 
@@ -19,13 +20,25 @@ public partial class TableEditorView : UserControl
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
     {
         if (_viewModel is not null)
+        {
             _viewModel.GridStructureChanged -= RebuildColumns;
+            _viewModel.PropertyChanged -= OnViewModelPropertyChanged;
+        }
 
         _viewModel = e.NewValue as TableEditorViewModel;
         if (_viewModel is not null)
+        {
             _viewModel.GridStructureChanged += RebuildColumns;
+            _viewModel.PropertyChanged += OnViewModelPropertyChanged;
+        }
 
         RebuildColumns();
+    }
+
+    private void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(TableEditorViewModel.ShowDedicatedDeadlineColumn))
+            RebuildColumns();
     }
 
     private void RebuildColumns()
@@ -40,7 +53,8 @@ public partial class TableEditorView : UserControl
             Header = "ID",
             Binding = new Binding("_RowId"),
             Visibility = Visibility.Collapsed,
-            IsReadOnly = true
+            IsReadOnly = true,
+            Width = DataGridLength.Auto
         });
 
         foreach (var col in _viewModel.Columns.OrderBy(c => c.Order))
@@ -50,58 +64,56 @@ public partial class TableEditorView : UserControl
                 ColumnType.Boolean => new DataGridCheckBoxColumn
                 {
                     Header = col.Name,
-                    Binding = new Binding(col.Id.ToString()) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }
+                    Binding = new Binding(col.Id.ToString()) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },
+                    MinWidth = 110,
+                    Width = DataGridLength.Auto
                 },
-                ColumnType.DateTime => new DataGridTextColumn
+                ColumnType.DateTime => new DataGridTemplateColumn
                 {
                     Header = col.Name,
-                    Binding = new Binding(col.Id.ToString())
-                    {
-                        UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                        StringFormat = "g"
-                    }
+                    CellTemplate = CreateDateTimeCellTemplate(col.Id.ToString()),
+                    MinWidth = 260,
+                    Width = DataGridLength.Auto
                 },
                 _ => new DataGridTextColumn
                 {
                     Header = col.Name,
-                    Binding = new Binding(col.Id.ToString()) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }
+                    Binding = new Binding(col.Id.ToString()) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },
+                    MinWidth = 110,
+                    Width = DataGridLength.Auto
                 }
             };
 
             DataGrid.Columns.Add(column);
         }
 
-        var actionsColumn = new DataGridTemplateColumn
+        if (_viewModel.ShowDedicatedDeadlineColumn)
+        {
+            DataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = _viewModel.Strings.DeadlineDateTime,
+                Binding = new Binding("_NextDeadline") { StringFormat = "g" },
+                IsReadOnly = true,
+                MinWidth = 160,
+                Width = DataGridLength.Auto
+            });
+        }
+
+        DataGrid.Columns.Add(new DataGridTemplateColumn
         {
             Header = _viewModel.Strings.Actions,
-            Width = 220,
-            CellTemplate = CreateActionsTemplate()
-        };
-        DataGrid.Columns.Add(actionsColumn);
+            CellTemplate = (DataTemplate)Resources["RowActionsTemplate"],
+            MinWidth = 240,
+            Width = DataGridLength.Auto
+        });
     }
 
-    private DataTemplate CreateActionsTemplate()
+    private static DataTemplate CreateDateTimeCellTemplate(string columnName)
     {
         var template = new DataTemplate();
-        var panel = new FrameworkElementFactory(typeof(StackPanel));
-        panel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
-
-        var manageBtn = new FrameworkElementFactory(typeof(Button));
-        manageBtn.SetValue(Button.ContentProperty, _viewModel?.Strings.ManageDeadlines ?? "Manage");
-        manageBtn.SetResourceReference(Button.StyleProperty, "SecondaryButton");
-        manageBtn.SetValue(Button.MarginProperty, new Thickness(0, 0, 8, 0));
-        manageBtn.SetBinding(Button.CommandProperty, new Binding(nameof(TableEditorViewModel.ManageDeadlinesCommand)));
-        manageBtn.SetBinding(Button.CommandParameterProperty, new Binding("_RowId"));
-
-        var deleteBtn = new FrameworkElementFactory(typeof(Button));
-        deleteBtn.SetValue(Button.ContentProperty, _viewModel?.Strings.DeleteRow ?? "Delete");
-        deleteBtn.SetResourceReference(Button.StyleProperty, "DangerButton");
-        deleteBtn.SetBinding(Button.CommandProperty, new Binding(nameof(TableEditorViewModel.DeleteRowCommand)));
-        deleteBtn.SetBinding(Button.CommandParameterProperty, new Binding("_RowId"));
-
-        panel.AppendChild(manageBtn);
-        panel.AppendChild(deleteBtn);
-        template.VisualTree = panel;
+        var factory = new FrameworkElementFactory(typeof(DateTimeEditorControl));
+        factory.SetValue(DateTimeEditorControl.ColumnNameProperty, columnName);
+        template.VisualTree = factory;
         return template;
     }
 }

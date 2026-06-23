@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CustomizableTablesWithDeadlines.Models;
 using CustomizableTablesWithDeadlines.Models.Enums;
+using CustomizableTablesWithDeadlines.Services;
 using CustomizableTablesWithDeadlines.Services.Interfaces;
 using CustomizableTablesWithDeadlines.Views.Dialogs;
 
@@ -13,15 +14,18 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
 {
     private readonly ITableService _tableService;
     private readonly INavigationService _navigationService;
-    private readonly Func<TableRowData, DeadlineManagementViewModel> _deadlineVmFactory;
+    private readonly Func<TableRowData, Task<DeadlineManagementViewModel>> _deadlineVmFactory;
     private CustomTable? _table;
     private DataTable _dataTable = new();
+    private int _nextTempRowId = -1;
+    private int _nextTempColumnId = -1;
 
     [ObservableProperty] private string _tableName = string.Empty;
     [ObservableProperty] private ObservableCollection<TableColumnDefinition> _columns = [];
     [ObservableProperty] private TableColumnDefinition? _selectedColumn;
     [ObservableProperty] private ColumnType _selectedColumnType = ColumnType.Text;
     [ObservableProperty] private DataView? _gridData;
+    [ObservableProperty] private bool _showDedicatedDeadlineColumn;
 
     public int TableId { get; private set; }
 
@@ -29,7 +33,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
         ILocalizationService localization,
         ITableService tableService,
         INavigationService navigationService,
-        Func<TableRowData, DeadlineManagementViewModel> deadlineVmFactory) : base(localization)
+        Func<TableRowData, Task<DeadlineManagementViewModel>> deadlineVmFactory) : base(localization)
     {
         _tableService = tableService;
         _navigationService = navigationService;
@@ -47,6 +51,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
 
         TableName = _table.Name;
         Columns = new ObservableCollection<TableColumnDefinition>(_table.Columns.OrderBy(c => c.Order));
+        SyncDeadlinesToColumns();
         RebuildGrid();
     }
 
@@ -64,6 +69,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
         var order = _table.Columns.Count;
         var column = new TableColumnDefinition
         {
+            Id = _nextTempColumnId--,
             Name = $"Column {order + 1}",
             Type = SelectedColumnType,
             Order = order
@@ -133,7 +139,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
     {
         if (_table is null) return;
 
-        var row = new TableRowData();
+        var row = new TableRowData { Id = _nextTempRowId-- };
         foreach (var col in _table.Columns)
             row.CellValues[col.Id] = GetDefaultValue(col.Type);
 
@@ -160,41 +166,95 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
         SyncGridToModel();
         _table.Name = TableName;
         await _tableService.UpdateTableAsync(_table);
+        RebuildGrid();
     }
 
     [RelayCommand]
-    private void ManageDeadlines(int rowId)
+    private async Task ManageDeadlinesAsync(int rowId)
     {
         if (_table is null) return;
 
         var row = _table.Rows.FirstOrDefault(r => r.Id == rowId);
         if (row is null) return;
 
-        var vm = _deadlineVmFactory(row);
-        var dialog = new DeadlineManagementDialog(vm);
+        if (rowId <= 0)
+        {
+            MessageBoxHelper.ShowError("Save the table before managing deadlines.");
+            return;
+        }
+
+        var vm = await _deadlineVmFactory(row);
+        var dialog = new DeadlineManagementDialog(vm)
+        {
+            Owner = System.Windows.Application.Current.MainWindow
+        };
         dialog.ShowDialog();
+
+        var refreshed = await _tableService.GetTableByIdAsync(TableId);
+        if (refreshed is not null)
+        {
+            foreach (var refreshedRow in refreshed.Rows)
+            {
+                var existingRow = _table.Rows.FirstOrDefault(r => r.Id == refreshedRow.Id);
+                if (existingRow is not null)
+                    existingRow.Deadlines = refreshedRow.Deadlines;
+            }
+        }
+
+        SyncDeadlinesToColumns();
         RebuildGrid();
+    }
+
+    private void SyncDeadlinesToColumns()
+    {
+        if (_table is null) return;
+
+        var deadlineColumns = DeadlineColumnHelper.GetDeadlineColumns(_table.Columns).ToList();
+        if (deadlineColumns.Count == 0)
+            return;
+
+        foreach (var row in _table.Rows)
+            DeadlineColumnHelper.SyncRowDeadlinesToColumns(row, deadlineColumns);
     }
 
     public void RebuildGrid()
     {
         if (_table is null) return;
 
+        SyncDeadlinesToColumns();
+
+        ShowDedicatedDeadlineColumn = !DeadlineColumnHelper.HasDeadlineColumn(_table.Columns);
+
         _dataTable = new DataTable();
         _dataTable.Columns.Add("_RowId", typeof(int));
+
+        if (ShowDedicatedDeadlineColumn)
+            _dataTable.Columns.Add("_NextDeadline", typeof(DateTime));
 
         foreach (var col in _table.Columns.OrderBy(c => c.Order))
             _dataTable.Columns.Add(col.Id.ToString(), GetClrType(col.Type));
 
-        foreach (var row in _table.Rows)
+        var sortedRows = _table.Rows
+            .OrderBy(r => DeadlineColumnHelper.GetNearestDeadlineDateTime(r) ?? DateTime.MaxValue)
+            .ThenBy(r => r.Id);
+
+        foreach (var row in sortedRows)
         {
             var dr = _dataTable.NewRow();
             dr["_RowId"] = row.Id;
+
+            if (ShowDedicatedDeadlineColumn)
+            {
+                var nearest = DeadlineColumnHelper.GetNearestDeadlineDateTime(row);
+                dr["_NextDeadline"] = nearest.HasValue ? nearest.Value : DBNull.Value;
+            }
+
             foreach (var col in _table.Columns)
             {
                 var value = row.CellValues.GetValueOrDefault(col.Id);
                 dr[col.Id.ToString()] = value ?? DBNull.Value;
             }
+
             _dataTable.Rows.Add(dr);
         }
 
@@ -226,7 +286,9 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
         if (_table is null) return;
 
         var ordered = _table.Columns.OrderBy(c => c.Order).ToList();
-        var index = ordered.FindIndex(c => c.Id == column.Id);
+        var index = ordered.FindIndex(c => ReferenceEquals(c, column));
+        if (index < 0)
+            index = ordered.FindIndex(c => c.Id == column.Id);
         var newIndex = index + direction;
         if (newIndex < 0 || newIndex >= ordered.Count)
             return;
