@@ -4,7 +4,7 @@ namespace CustomizableTablesWithDeadlines.Models;
 
 public class DeadlineItem
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public int Id { get; set; }
     public string Title { get; set; } = string.Empty;
     public DateTime DeadlineDateTime { get; set; } = DateTime.Now.AddDays(1);
     public NotifyBeforeOption NotifyBefore { get; set; } = NotifyBeforeOption.OneHour;

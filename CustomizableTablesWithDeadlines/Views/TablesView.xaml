@@ -9,7 +9,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
             <Button Content="{Binding Strings.CreateNewTable}" Style="{StaticResource PrimaryButton}" Margin="0,0,8,0"
-                    Command="{Binding CreateTableCommand}" />
+                    Command="{Binding CreateTableAsyncCommand}" />
             <Button Content="{Binding Strings.ImportFromWord}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
                     Command="{Binding ImportFromWordCommand}" />
             <Button Content="{Binding Strings.RenameTable}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"

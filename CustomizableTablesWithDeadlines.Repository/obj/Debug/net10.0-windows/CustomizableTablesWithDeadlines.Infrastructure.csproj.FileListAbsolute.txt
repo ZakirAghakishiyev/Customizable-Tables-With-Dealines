@@ -1,0 +1,6 @@
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0-windows\CustomizableTablesWithDeadlines.Infrastructure.csproj.AssemblyReference.cache
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0-windows\CustomizableTablesWithDeadlines.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0-windows\CustomizableTablesWithDeadlines.Infrastructure.AssemblyInfoInputs.cache
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0-windows\CustomizableTablesWithDeadlines.Infrastructure.AssemblyInfo.cs
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0-windows\CustomizableTablesWithDeadlines.Infrastructure.csproj.CoreCompileInputs.cache
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0-windows\CustomizableTablesWithDeadlines.Infrastructure.sourcelink.json

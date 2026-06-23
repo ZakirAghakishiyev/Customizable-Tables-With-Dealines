@@ -8,38 +8,25 @@ namespace CustomizableTablesWithDeadlines.ViewModels;
 public partial class MainViewModel : LocalizedViewModelBase
 {
     private readonly INavigationService _navigationService;
-    private readonly DashboardViewModel _dashboardViewModel;
-    private readonly TablesViewModel _tablesViewModel;
-    private readonly DeadlinesViewModel _deadlinesViewModel;
-    private readonly NotificationSettingsViewModel _notificationSettingsViewModel;
-    private readonly SettingsViewModel _settingsViewModel;
 
-    [ObservableProperty] private object? _currentViewModel;
+    [ObservableProperty] private object? _currentView;
     [ObservableProperty] private string _pageTitle = string.Empty;
     [ObservableProperty] private NavigationItem? _selectedNavigationItem;
     [ObservableProperty] private ObservableCollection<NavigationItem> _navigationItems = [];
 
+    public object? CurrentViewModel => CurrentView;
+
     public MainViewModel(
         ILocalizationService localization,
-        INavigationService navigationService,
-        DashboardViewModel dashboardViewModel,
-        TablesViewModel tablesViewModel,
-        DeadlinesViewModel deadlinesViewModel,
-        NotificationSettingsViewModel notificationSettingsViewModel,
-        SettingsViewModel settingsViewModel) : base(localization)
+        INavigationService navigationService) : base(localization)
     {
         _navigationService = navigationService;
-        _dashboardViewModel = dashboardViewModel;
-        _tablesViewModel = tablesViewModel;
-        _deadlinesViewModel = deadlinesViewModel;
-        _notificationSettingsViewModel = notificationSettingsViewModel;
-        _settingsViewModel = settingsViewModel;
 
         localization.LanguageChanged += (_, _) => BuildNavigation();
 
         _navigationService.Navigated += vm =>
         {
-            CurrentViewModel = vm;
+            CurrentView = vm;
             if (vm is TableEditorViewModel editor)
                 PageTitle = $"{Strings.TableEditor} — {editor.TableName}";
             else if (SelectedNavigationItem is not null)
@@ -47,18 +34,19 @@ public partial class MainViewModel : LocalizedViewModelBase
         };
 
         BuildNavigation();
-        NavigateTo(_dashboardViewModel);
+        NavigateDashboardCommand.Execute(null);
     }
 
     private void BuildNavigation()
     {
         var items = new[]
         {
-            new NavigationItem { Key = "Dashboard", Title = Strings.Dashboard, Icon = "\uE80F", ViewModel = _dashboardViewModel },
-            new NavigationItem { Key = "Tables", Title = Strings.Tables, Icon = "\uE8A5", ViewModel = _tablesViewModel },
-            new NavigationItem { Key = "Deadlines", Title = Strings.Deadlines, Icon = "\uE823", ViewModel = _deadlinesViewModel },
-            new NavigationItem { Key = "NotificationSettings", Title = Strings.NotificationSettings, Icon = "\uE7ED", ViewModel = _notificationSettingsViewModel },
-            new NavigationItem { Key = "Settings", Title = Strings.Settings, Icon = "\uE713", ViewModel = _settingsViewModel }
+            new NavigationItem { Key = "Dashboard", Title = Strings.Dashboard, Icon = "\uE80F", NavigateCommand = NavigateDashboardCommand },
+            new NavigationItem { Key = "Tables", Title = Strings.Tables, Icon = "\uE8A5", NavigateCommand = NavigateTablesCommand },
+            new NavigationItem { Key = "Import", Title = Strings.ImportFromWord, Icon = "\uE8B5", NavigateCommand = NavigateImportCommand },
+            new NavigationItem { Key = "Deadlines", Title = Strings.Deadlines, Icon = "\uE823", NavigateCommand = NavigateDeadlinesCommand },
+            new NavigationItem { Key = "NotificationSettings", Title = Strings.NotificationSettings, Icon = "\uE7ED", NavigateCommand = NavigateNotificationSettingsCommand },
+            new NavigationItem { Key = "Settings", Title = Strings.Settings, Icon = "\uE713", NavigateCommand = NavigateSettingsCommand }
         };
 
         var currentKey = SelectedNavigationItem?.Key;
@@ -68,41 +56,58 @@ public partial class MainViewModel : LocalizedViewModelBase
 
     partial void OnSelectedNavigationItemChanged(NavigationItem? value)
     {
-        if (value is not null)
-            NavigateTo(value.ViewModel);
+        value?.NavigateCommand?.Execute(null);
     }
 
-    private async void NavigateTo(object viewModel)
+    [RelayCommand]
+    private async Task NavigateDashboardAsync()
     {
-        CurrentViewModel = viewModel;
-
-        if (viewModel is DashboardViewModel dashboard)
-        {
-            PageTitle = Strings.Dashboard;
+        _navigationService.NavigateTo<DashboardViewModel>();
+        PageTitle = Strings.Dashboard;
+        if (CurrentView is DashboardViewModel dashboard)
             await dashboard.LoadAsync();
-        }
-        else if (viewModel is TablesViewModel tables)
-        {
-            PageTitle = Strings.Tables;
+    }
+
+    [RelayCommand]
+    private async Task NavigateTablesAsync()
+    {
+        _navigationService.NavigateTo<TablesViewModel>();
+        PageTitle = Strings.Tables;
+        if (CurrentView is TablesViewModel tables)
             await tables.LoadAsync();
-        }
-        else if (viewModel is DeadlinesViewModel deadlines)
-        {
-            PageTitle = Strings.Deadlines;
+    }
+
+    [RelayCommand]
+    private void NavigateImport()
+    {
+        _navigationService.NavigateTo<ImportViewModel>();
+        PageTitle = Strings.ImportFromWord;
+    }
+
+    [RelayCommand]
+    private async Task NavigateDeadlinesAsync()
+    {
+        _navigationService.NavigateTo<DeadlinesViewModel>();
+        PageTitle = Strings.Deadlines;
+        if (CurrentView is DeadlinesViewModel deadlines)
             await deadlines.LoadAsync();
-        }
-        else if (viewModel is NotificationSettingsViewModel notification)
-        {
-            PageTitle = Strings.NotificationSettings;
+    }
+
+    [RelayCommand]
+    private async Task NavigateNotificationSettingsAsync()
+    {
+        _navigationService.NavigateTo<NotificationSettingsViewModel>();
+        PageTitle = Strings.NotificationSettings;
+        if (CurrentView is NotificationSettingsViewModel notification)
             await notification.LoadAsync();
-        }
-        else if (viewModel is SettingsViewModel)
-        {
-            PageTitle = Strings.Settings;
-        }
-        else if (viewModel is TableEditorViewModel editor)
-        {
-            PageTitle = $"{Strings.TableEditor} — {editor.TableName}";
-        }
+    }
+
+    [RelayCommand]
+    private async Task NavigateSettingsAsync()
+    {
+        _navigationService.NavigateTo<SettingsViewModel>();
+        PageTitle = Strings.Settings;
+        if (CurrentView is SettingsViewModel settings)
+            await settings.LoadAsync();
     }
 }

@@ -312,3 +312,6 @@ c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWit
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\bin\Debug\net10.0-windows\DocumentFormat.OpenXml.dll
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\bin\Debug\net10.0-windows\DocumentFormat.OpenXml.Framework.dll
 c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows\Views\Dialogs\ImportWordPreviewDialog.baml
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows\az\CustomizableTablesWithDeadlines.Presentation.resources.cs
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows\en\CustomizableTablesWithDeadlines.Presentation.resources.cs
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines\obj\Debug\net10.0-windows\ru\CustomizableTablesWithDeadlines.Presentation.resources.cs

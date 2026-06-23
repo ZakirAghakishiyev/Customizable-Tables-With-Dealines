@@ -10,3 +10,7 @@ C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWit
 C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Application\obj\Debug\net10.0\refint\CustomizableTablesWithDeadlines.Application.dll
 C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Application\obj\Debug\net10.0\CustomizableTablesWithDeadlines.Application.pdb
 C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Application\obj\Debug\net10.0\ref\CustomizableTablesWithDeadlines.Application.dll
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Application\bin\Debug\net10.0\CustomizableTablesWithDeadlines.Domain.dll
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Application\bin\Debug\net10.0\CustomizableTablesWithDeadlines.Domain.pdb
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Application\obj\Debug\net10.0\CustomizableTablesWithDeadlines.Application.csproj.AssemblyReference.cache
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Application\obj\Debug\net10.0\Customiz.7536C8A5.Up2Date

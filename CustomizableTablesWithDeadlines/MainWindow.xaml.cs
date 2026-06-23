@@ -1,12 +1,9 @@
-﻿using System.Windows;
+﻿namespace CustomizableTablesWithDeadlines;
 
-namespace CustomizableTablesWithDeadlines;
-
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     public MainWindow()
     {
         InitializeComponent();
-        DataContext = App.GetService<ViewModels.MainViewModel>();
     }
 }

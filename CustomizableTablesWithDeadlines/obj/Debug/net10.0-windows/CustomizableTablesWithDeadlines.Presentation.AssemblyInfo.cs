@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CustomizableTablesWithDeadlines.Presentation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bcc834f52cb7c0bb800a29fd3cf29d17f75ab18")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9431d3cbe5a99da2dc4fb2678a6719a1fecf997b")]
 [assembly: System.Reflection.AssemblyProductAttribute("CustomizableTablesWithDeadlines.Presentation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CustomizableTablesWithDeadlines.Presentation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

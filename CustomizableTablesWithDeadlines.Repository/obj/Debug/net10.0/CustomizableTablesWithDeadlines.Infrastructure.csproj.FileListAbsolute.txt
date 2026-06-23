@@ -10,3 +10,4 @@ C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWit
 C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0\refint\CustomizableTablesWithDeadlines.Infrastructure.dll
 C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0\CustomizableTablesWithDeadlines.Infrastructure.pdb
 C:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0\ref\CustomizableTablesWithDeadlines.Infrastructure.dll
+c:\Users\User\source\repos\CustomizableTablesWithDeadlines\CustomizableTablesWithDeadlines.Repository\obj\Debug\net10.0\CustomizableTablesWithDeadlines.Infrastructure.csproj.AssemblyReference.cache

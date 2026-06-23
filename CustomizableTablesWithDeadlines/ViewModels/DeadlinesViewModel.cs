@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using CustomizableTablesWithDeadlines.Localization;
 using CustomizableTablesWithDeadlines.Models;
 using CustomizableTablesWithDeadlines.Models.Enums;
+using CustomizableTablesWithDeadlines.Services;
 using CustomizableTablesWithDeadlines.Services.Interfaces;
 
 namespace CustomizableTablesWithDeadlines.ViewModels;
@@ -35,7 +36,7 @@ public partial class DeadlinesViewModel : LocalizedViewModelBase
 
     private void ApplyFilter()
     {
-        var filtered = Services.Mock.MockDeadlineService.FilterDeadlines(_allDeadlines, SelectedFilter);
+        var filtered = DeadlineFilterHelper.Filter(_allDeadlines, SelectedFilter);
         Deadlines = new ObservableCollection<DeadlineDisplayItem>(
             filtered.Select(d => new DeadlineDisplayItem(d, Strings)));
     }

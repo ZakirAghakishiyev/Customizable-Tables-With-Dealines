@@ -28,6 +28,9 @@
         <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
             <views:SettingsView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ImportViewModel}">
+            <views:ImportView />
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>
@@ -105,7 +108,7 @@
                 <TextBlock Text="{Binding PageTitle}" Style="{StaticResource PageTitle}" />
             </Border>
 
-            <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+            <ContentControl Grid.Row="1" Content="{Binding CurrentView}" />
         </Grid>
     </Grid>
 </Window>

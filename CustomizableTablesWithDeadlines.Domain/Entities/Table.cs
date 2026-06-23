@@ -1,5 +1,4 @@
 ﻿using CustomizableTablesWithDeadlines.Domain.Entities.Base;
-using System.Data.Common;
 
 namespace CustomizableTablesWithDeadlines.Domain.Entities;
 

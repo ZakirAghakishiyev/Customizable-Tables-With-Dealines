@@ -23,7 +23,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
     [ObservableProperty] private ColumnType _selectedColumnType = ColumnType.Text;
     [ObservableProperty] private DataView? _gridData;
 
-    public Guid TableId { get; private set; }
+    public int TableId { get; private set; }
 
     public TableEditorViewModel(
         ILocalizationService localization,
@@ -38,7 +38,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
 
     public event Action? GridStructureChanged;
 
-    public async Task InitializeAsync(Guid tableId)
+    public async Task InitializeAsync(int tableId)
     {
         TableId = tableId;
         _table = await _tableService.GetTableByIdAsync(tableId);
@@ -53,8 +53,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
     [RelayCommand]
     private void BackToTables()
     {
-        var tablesVm = App.GetService<TablesViewModel>();
-        _navigationService.NavigateTo(tablesVm);
+        _navigationService.NavigateTo<TablesViewModel>();
     }
 
     [RelayCommand]
@@ -143,7 +142,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
     }
 
     [RelayCommand]
-    private void DeleteRow(Guid rowId)
+    private void DeleteRow(int rowId)
     {
         if (_table is null) return;
         if (!MessageBoxHelper.Confirm(Strings.ConfirmDelete))
@@ -164,7 +163,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
     }
 
     [RelayCommand]
-    private void ManageDeadlines(Guid rowId)
+    private void ManageDeadlines(int rowId)
     {
         if (_table is null) return;
 
@@ -182,7 +181,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
         if (_table is null) return;
 
         _dataTable = new DataTable();
-        _dataTable.Columns.Add("_RowId", typeof(Guid));
+        _dataTable.Columns.Add("_RowId", typeof(int));
 
         foreach (var col in _table.Columns.OrderBy(c => c.Order))
             _dataTable.Columns.Add(col.Id.ToString(), GetClrType(col.Type));
@@ -210,7 +209,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
         _dataTable.AcceptChanges();
         foreach (DataRow dr in _dataTable.Rows)
         {
-            var rowId = (Guid)dr["_RowId"];
+            var rowId = (int)dr["_RowId"];
             var row = _table.Rows.FirstOrDefault(r => r.Id == rowId);
             if (row is null) continue;
 
