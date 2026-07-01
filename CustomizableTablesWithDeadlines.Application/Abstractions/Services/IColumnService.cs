@@ -6,6 +6,7 @@ public interface IColumnService
 {
     Task<int> CreateAsync(CreateColumnDto dto, CancellationToken cancellationToken = default);
     Task RenameAsync(RenameColumnDto dto, CancellationToken cancellationToken = default);
+    Task ChangeDataTypeAsync(ChangeColumnDataTypeDto dto, CancellationToken cancellationToken = default);
     Task DeleteAsync(int columnId, CancellationToken cancellationToken = default);
     Task ReorderAsync(List<ReorderColumnDto> columns, CancellationToken cancellationToken = default);
 }

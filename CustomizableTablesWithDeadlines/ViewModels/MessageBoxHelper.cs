@@ -9,4 +9,10 @@ public static class MessageBoxHelper
 
     public static void ShowError(string message) =>
         MessageBox.Show(message, string.Empty, MessageBoxButton.OK, MessageBoxImage.Error);
+
+    public static void ShowWarning(string message) =>
+        MessageBox.Show(message, string.Empty, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+    public static void ShowInfo(string message) =>
+        MessageBox.Show(message, string.Empty, MessageBoxButton.OK, MessageBoxImage.Information);
 }

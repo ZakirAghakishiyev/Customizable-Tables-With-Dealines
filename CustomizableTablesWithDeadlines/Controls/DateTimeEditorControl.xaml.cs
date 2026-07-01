@@ -2,6 +2,8 @@ using System.Data;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CustomizableTablesWithDeadlines.Controls;
 
@@ -21,14 +23,41 @@ public partial class DateTimeEditorControl : UserControl
             typeof(DateTimeEditorControl),
             new PropertyMetadata(null, OnColumnNameChanged));
 
+    private static DateTimeEditorControl? _activeEditor;
+
     private bool _syncing;
+    private bool _isEditing;
 
     public DateTimeEditorControl()
     {
         InitializeComponent();
-        PopulateTimeOptions();
-        DatePart.SelectedDateChanged += (_, _) => CommitSelection();
-        DataContextChanged += (_, _) => SyncFromSource();
+        PopulateHourOptions();
+        PopulateMinuteOptions();
+        DatePart.SelectedDateChanged += (_, _) => OnEditorValueChanged();
+        DataContextChanged += OnDataContextChanged;
+        Loaded += (_, _) => SyncFromSource();
+        Unloaded += OnUnloaded;
+    }
+
+    private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+        ResetDisplayMode();
+        SyncFromSource();
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        if (_activeEditor == this)
+            _activeEditor = null;
+
+        ResetDisplayMode();
+    }
+
+    private void ResetDisplayMode()
+    {
+        _isEditing = false;
+        DisplayText.Visibility = Visibility.Visible;
+        EditorPanel.Visibility = Visibility.Collapsed;
     }
 
     public DateTime? Value
@@ -43,6 +72,11 @@ public partial class DateTimeEditorControl : UserControl
         set => SetValue(ColumnNameProperty, value);
     }
 
+    public static void CommitActiveEdit()
+    {
+        _activeEditor?.EndEdit();
+    }
+
     private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is DateTimeEditorControl editor && !editor._syncing && string.IsNullOrEmpty(editor.ColumnName))
@@ -55,16 +89,16 @@ public partial class DateTimeEditorControl : UserControl
             editor.SyncFromSource();
     }
 
-    private void PopulateTimeOptions()
+    private void PopulateHourOptions()
     {
         for (var hour = 0; hour < 24; hour++)
-        {
-            for (var minute = 0; minute < 60; minute += 15)
-            {
-                var time = new DateTime(1, 1, 1, hour, minute, 0);
-                TimePart.Items.Add(time.ToString("t", CultureInfo.CurrentCulture));
-            }
-        }
+            HourPart.Items.Add(hour.ToString("00", CultureInfo.InvariantCulture));
+    }
+
+    private void PopulateMinuteOptions()
+    {
+        for (var minute = 0; minute < 60; minute++)
+            MinutePart.Items.Add(minute.ToString("00", CultureInfo.InvariantCulture));
     }
 
     private void SyncFromSource()
@@ -72,26 +106,97 @@ public partial class DateTimeEditorControl : UserControl
         if (_syncing)
             return;
 
-        if (!string.IsNullOrEmpty(ColumnName) && DataContext is DataRowView row)
-        {
-            ApplyToPickers(ReadRowValue(row, ColumnName));
-            return;
-        }
+        var value = ReadCurrentValue();
+        if (!_isEditing)
+            ApplyToPickers(value);
 
-        if (string.IsNullOrEmpty(ColumnName))
-            ApplyToPickers(Value);
+        UpdateDisplayText(value);
     }
 
-    private void OnTimeSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void OnDisplayClick(object sender, MouseButtonEventArgs e)
     {
-        if (_syncing || TimePart.SelectedItem is null)
+        BeginEdit();
+    }
+
+    private void BeginEdit()
+    {
+        if (_isEditing)
+            return;
+
+        if (_activeEditor is not null && _activeEditor != this)
+            _activeEditor.EndEdit();
+
+        _activeEditor = this;
+        _isEditing = true;
+        DisplayText.Visibility = Visibility.Collapsed;
+        EditorPanel.Visibility = Visibility.Visible;
+        ApplyToPickers(ReadCurrentValue());
+        Focus();
+        DatePart.Focus();
+    }
+
+    public void EndEdit()
+    {
+        if (!_isEditing)
             return;
 
         CommitSelection();
+        _isEditing = false;
+        DisplayText.Visibility = Visibility.Visible;
+        EditorPanel.Visibility = Visibility.Collapsed;
+        UpdateDisplayText(ReadCurrentValue());
+
+        if (_activeEditor == this)
+            _activeEditor = null;
     }
 
-    private void OnTimeLostFocus(object sender, RoutedEventArgs e) =>
+    private void OnRootLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        if (!_isEditing)
+            return;
+
+        if (DatePart.IsDropDownOpen || HourPart.IsDropDownOpen || MinutePart.IsDropDownOpen)
+            return;
+
+        if (e.NewFocus is DependencyObject focus && IsDescendantOf(this, focus))
+            return;
+
+        EndEdit();
+    }
+
+    private void OnEditorValueChanged()
+    {
+        if (_syncing || !_isEditing)
+            return;
+
+        EnsureDefaultTimeSelections();
         CommitSelection();
+        UpdateDisplayText(ReadCurrentValue());
+    }
+
+    private void EnsureDefaultTimeSelections()
+    {
+        if (DatePart.SelectedDate is null)
+            return;
+
+        if (HourPart.SelectedItem is null)
+            HourPart.SelectedItem = "00";
+
+        if (MinutePart.SelectedItem is null)
+            MinutePart.SelectedItem = "00";
+    }
+
+    private void OnTimePartChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_syncing || !_isEditing)
+            return;
+
+        if (HourPart.SelectedItem is null || MinutePart.SelectedItem is null)
+            return;
+
+        CommitSelection();
+        UpdateDisplayText(ReadCurrentValue());
+    }
 
     private void CommitSelection()
     {
@@ -120,29 +225,20 @@ public partial class DateTimeEditorControl : UserControl
 
     private DateTime? CombineSelected()
     {
-        if (DatePart.SelectedDate is null && string.IsNullOrWhiteSpace(GetTimeText()))
+        if (DatePart.SelectedDate is null)
             return null;
 
-        var date = DatePart.SelectedDate ?? DateTime.Today;
-        var time = TryParseTime(GetTimeText()) ?? TimeSpan.Zero;
-        return date.Date + time;
+        var hour = ParseSelectedNumber(HourPart) ?? 0;
+        var minute = ParseSelectedNumber(MinutePart) ?? 0;
+        return DatePart.SelectedDate.Value.Date.AddHours(hour).AddMinutes(minute);
     }
 
-    private string GetTimeText() =>
-        TimePart.SelectedItem as string ?? TimePart.Text;
-
-    private static TimeSpan? TryParseTime(string? text)
+    private static int? ParseSelectedNumber(ComboBox comboBox)
     {
-        if (string.IsNullOrWhiteSpace(text))
-            return null;
-
-        if (DateTime.TryParse(text, CultureInfo.CurrentCulture, DateTimeStyles.NoCurrentDateDefault, out var parsed))
-            return parsed.TimeOfDay;
-
-        if (TimeSpan.TryParse(text, CultureInfo.CurrentCulture, out var timeSpan))
-            return timeSpan;
-
-        return null;
+        var text = comboBox.SelectedItem as string ?? comboBox.Text;
+        return int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value)
+            ? value
+            : null;
     }
 
     private void ApplyToPickers(DateTime? value)
@@ -153,23 +249,45 @@ public partial class DateTimeEditorControl : UserControl
             if (value is null)
             {
                 DatePart.SelectedDate = null;
-                TimePart.SelectedItem = null;
-                TimePart.Text = string.Empty;
+                HourPart.SelectedItem = null;
+                MinutePart.SelectedItem = null;
                 return;
             }
 
             DatePart.SelectedDate = value.Value.Date;
-            var timeText = value.Value.ToString("t", CultureInfo.CurrentCulture);
-            var match = TimePart.Items.Cast<object>().FirstOrDefault(item => Equals(item, timeText));
-            if (match is not null)
-                TimePart.SelectedItem = match;
-            else
-                TimePart.Text = timeText;
+            var hourText = value.Value.Hour.ToString("00", CultureInfo.InvariantCulture);
+            var minuteText = value.Value.Minute.ToString("00", CultureInfo.InvariantCulture);
+            HourPart.SelectedItem = HourPart.Items.Cast<object>().FirstOrDefault(item => Equals(item, hourText));
+            MinutePart.SelectedItem = MinutePart.Items.Cast<object>().FirstOrDefault(item => Equals(item, minuteText));
         }
         finally
         {
             _syncing = false;
         }
+    }
+
+    private void UpdateDisplayText(DateTime? value = null)
+    {
+        value ??= ReadCurrentValue();
+
+        if (value is null)
+        {
+            DisplayText.Text = string.Empty;
+            DisplayText.Foreground = (Brush)FindResource("TextSecondaryBrush");
+            return;
+        }
+
+        DisplayText.Text = value.Value.ToString("g", CultureInfo.CurrentCulture);
+        DisplayText.Foreground = (Brush)FindResource("TextPrimaryBrush");
+        ToolTip = DisplayText.Text;
+    }
+
+    private DateTime? ReadCurrentValue()
+    {
+        if (!string.IsNullOrEmpty(ColumnName) && DataContext is DataRowView row)
+            return ReadRowValue(row, ColumnName);
+
+        return Value;
     }
 
     private static DateTime? ReadRowValue(DataRowView row, string columnName)
@@ -181,6 +299,21 @@ public partial class DateTimeEditorControl : UserControl
         if (raw == DBNull.Value || raw is null)
             return null;
 
-        return raw is DateTime dt ? dt : Convert.ToDateTime(raw);
+        return raw is DateTime dt ? dt : Convert.ToDateTime(raw, CultureInfo.CurrentCulture);
+    }
+
+    private static bool IsDescendantOf(DependencyObject ancestor, DependencyObject? node)
+    {
+        while (node is not null)
+        {
+            if (node == ancestor)
+                return true;
+
+            node = node is Visual
+                ? VisualTreeHelper.GetParent(node)
+                : LogicalTreeHelper.GetParent(node);
+        }
+
+        return false;
     }
 }

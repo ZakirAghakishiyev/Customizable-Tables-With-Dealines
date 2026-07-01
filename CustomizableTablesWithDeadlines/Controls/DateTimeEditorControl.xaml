@@ -1,18 +1,49 @@
 <UserControl x:Class="CustomizableTablesWithDeadlines.Controls.DateTimeEditorControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Name="Root">
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-        <DatePicker x:Name="DatePart"
-                    Width="130"
-                    Margin="0,0,6,0"
-                    VerticalAlignment="Center" />
-        <ComboBox x:Name="TimePart"
-                  Width="110"
-                  VerticalAlignment="Center"
-                  IsEditable="True"
-                  Style="{StaticResource ModernComboBox}"
-                  SelectionChanged="OnTimeSelectionChanged"
-                  LostFocus="OnTimeLostFocus" />
-    </StackPanel>
+             x:Name="Root"
+             Focusable="True"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Center"
+             HorizontalContentAlignment="Stretch"
+             ClipToBounds="True"
+             LostKeyboardFocus="OnRootLostKeyboardFocus">
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Center"
+          ClipToBounds="True">
+        <TextBlock x:Name="DisplayText"
+                   Style="{StaticResource BodyText}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   TextTrimming="CharacterEllipsis"
+                   Cursor="Hand"
+                   MouseLeftButtonDown="OnDisplayClick" />
+
+        <Grid x:Name="EditorPanel"
+              Visibility="Collapsed"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="96" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <DatePicker x:Name="DatePart"
+                        Grid.Column="0"
+                        Margin="0,0,4,0"
+                        Style="{StaticResource GridCompactDatePicker}"
+                        HorizontalAlignment="Stretch" />
+            <ComboBox x:Name="HourPart"
+                      Grid.Column="1"
+                      Width="48"
+                      Margin="0,0,2,0"
+                      Style="{StaticResource GridCompactComboBox}"
+                      SelectionChanged="OnTimePartChanged" />
+            <ComboBox x:Name="MinutePart"
+                      Grid.Column="2"
+                      Width="48"
+                      Style="{StaticResource GridCompactComboBox}"
+                      SelectionChanged="OnTimePartChanged" />
+        </Grid>
+    </Grid>
 </UserControl>

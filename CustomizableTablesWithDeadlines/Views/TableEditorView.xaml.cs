@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using CustomizableTablesWithDeadlines.Controls;
 using CustomizableTablesWithDeadlines.Models.Enums;
 using CustomizableTablesWithDeadlines.ViewModels;
@@ -15,6 +16,25 @@ public partial class TableEditorView : UserControl
     {
         InitializeComponent();
         DataContextChanged += OnDataContextChanged;
+        DataGrid.PreviewMouseDown += OnDataGridPreviewMouseDown;
+    }
+
+    private void OnDataGridPreviewMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.OriginalSource is not DependencyObject source)
+            return;
+
+        var node = source;
+        while (node is not null)
+        {
+            if (node is DateTimeEditorControl)
+                return;
+
+            node = System.Windows.Media.VisualTreeHelper.GetParent(node)
+                   ?? System.Windows.LogicalTreeHelper.GetParent(node);
+        }
+
+        DateTimeEditorControl.CommitActiveEdit();
     }
 
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -46,6 +66,8 @@ public partial class TableEditorView : UserControl
         if (_viewModel is null)
             return;
 
+        var cellTextStyle = (Style)FindResource("DataGridCellText");
+
         DataGrid.Columns.Clear();
 
         DataGrid.Columns.Add(new DataGridTextColumn
@@ -65,22 +87,24 @@ public partial class TableEditorView : UserControl
                 {
                     Header = col.Name,
                     Binding = new Binding(col.Id.ToString()) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },
-                    MinWidth = 110,
-                    Width = DataGridLength.Auto
+                    MinWidth = 80,
+                    Width = new DataGridLength(1, DataGridLengthUnitType.Star),
+                    ElementStyle = CreateCheckBoxCellStyle()
                 },
                 ColumnType.DateTime => new DataGridTemplateColumn
                 {
                     Header = col.Name,
                     CellTemplate = CreateDateTimeCellTemplate(col.Id.ToString()),
-                    MinWidth = 260,
-                    Width = DataGridLength.Auto
+                    MinWidth = 180,
+                    Width = new DataGridLength(1.2, DataGridLengthUnitType.Star)
                 },
                 _ => new DataGridTextColumn
                 {
                     Header = col.Name,
                     Binding = new Binding(col.Id.ToString()) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged },
-                    MinWidth = 110,
-                    Width = DataGridLength.Auto
+                    MinWidth = 100,
+                    Width = new DataGridLength(1, DataGridLengthUnitType.Star),
+                    ElementStyle = cellTextStyle
                 }
             };
 
@@ -94,8 +118,9 @@ public partial class TableEditorView : UserControl
                 Header = _viewModel.Strings.DeadlineDateTime,
                 Binding = new Binding("_NextDeadline") { StringFormat = "g" },
                 IsReadOnly = true,
-                MinWidth = 160,
-                Width = DataGridLength.Auto
+                MinWidth = 140,
+                Width = new DataGridLength(1.2, DataGridLengthUnitType.Star),
+                ElementStyle = cellTextStyle
             });
         }
 
@@ -103,8 +128,9 @@ public partial class TableEditorView : UserControl
         {
             Header = _viewModel.Strings.Actions,
             CellTemplate = (DataTemplate)Resources["RowActionsTemplate"],
-            MinWidth = 240,
-            Width = DataGridLength.Auto
+            MinWidth = 96,
+            Width = 96,
+            CanUserResize = false
         });
     }
 
@@ -113,7 +139,18 @@ public partial class TableEditorView : UserControl
         var template = new DataTemplate();
         var factory = new FrameworkElementFactory(typeof(DateTimeEditorControl));
         factory.SetValue(DateTimeEditorControl.ColumnNameProperty, columnName);
+        factory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+        factory.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
         template.VisualTree = factory;
         return template;
+    }
+
+    private static Style CreateCheckBoxCellStyle()
+    {
+        var style = new Style(typeof(CheckBox));
+        style.Setters.Add(new Setter(VerticalAlignmentProperty, VerticalAlignment.Center));
+        style.Setters.Add(new Setter(HorizontalAlignmentProperty, HorizontalAlignment.Center));
+        style.Setters.Add(new Setter(MarginProperty, new Thickness(0)));
+        return style;
     }
 }

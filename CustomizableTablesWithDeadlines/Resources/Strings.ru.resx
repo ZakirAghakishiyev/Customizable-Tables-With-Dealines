@@ -149,4 +149,11 @@
   <data name="SuggestedDeadlineColumns" xml:space="preserve"><value>Предлагаемые столбцы сроков</value></data>
   <data name="SuggestedDeadlineColumnsHint" xml:space="preserve"><value>Обнаружены столбцы с датой/временем. Выберите, какие столбцы должны создавать сроки для строк при импорте.</value></data>
   <data name="NoDeadlineColumnsDetected" xml:space="preserve"><value>Столбцы с датой/временем не обнаружены.</value></data>
+  <data name="ColumnTypeChangeBlocked" xml:space="preserve"><value>Невозможно изменить тип столбца. В {0} ячейках есть значения, которые нельзя преобразовать.</value></data>
+  <data name="ApplyColumnType" xml:space="preserve"><value>Применить тип</value></data>
+  <data name="TestNotification" xml:space="preserve"><value>Проверить уведомление</value></data>
+  <data name="TestNotificationTitle" xml:space="preserve"><value>Тестовое уведомление</value></data>
+  <data name="TestNotificationMessage" xml:space="preserve"><value>Уведомления на рабочем столе работают.</value></data>
+  <data name="TestNotificationSent" xml:space="preserve"><value>Тестовое уведомление отправлено. Окно было ненадолго свернуто, чтобы Windows мог показать баннер. Если баннер не появился, проверьте режим «Фокусировка внимания».</value></data>
+  <data name="TestNotificationFailed" xml:space="preserve"><value>Windows заблокировал уведомление. Включите уведомления для этого приложения в параметрах Windows и попробуйте снова.</value></data>
 </root>

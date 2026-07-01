@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CustomizableTablesWithDeadlines.Models;
 using CustomizableTablesWithDeadlines.Models.Enums;
+using CustomizableTablesWithDeadlines.Controls;
 using CustomizableTablesWithDeadlines.Services;
 using CustomizableTablesWithDeadlines.Services.Interfaces;
 using CustomizableTablesWithDeadlines.Views.Dialogs;
@@ -129,9 +130,53 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
     [RelayCommand]
     private void ChangeColumnType()
     {
-        if (SelectedColumn is null) return;
+        if (SelectedColumn is null)
+        {
+            MessageBoxHelper.ShowWarning(Strings.SelectColumn);
+            return;
+        }
+
+        if (_table is null)
+            return;
+
+        if (SelectedColumn.Type == SelectedColumnType)
+            return;
+
+        var columnId = SelectedColumn.Id;
+        var invalidCount = 0;
+
+        foreach (var row in _table.Rows)
+        {
+            row.CellValues.TryGetValue(columnId, out var value);
+            if (!ColumnCellValueConverter.TryConvert(value, SelectedColumnType, out _))
+                invalidCount++;
+        }
+
+        if (invalidCount > 0)
+        {
+            MessageBoxHelper.ShowWarning(string.Format(Strings.ColumnTypeChangeBlocked, invalidCount));
+            SelectedColumnType = SelectedColumn.Type;
+            return;
+        }
+
+        foreach (var row in _table.Rows)
+        {
+            row.CellValues.TryGetValue(columnId, out var value);
+            if (ColumnCellValueConverter.TryConvert(value, SelectedColumnType, out var converted))
+                row.CellValues[columnId] = converted;
+        }
+
         SelectedColumn.Type = SelectedColumnType;
+        OnPropertyChanged(nameof(Columns));
         RebuildGrid();
+    }
+
+    partial void OnSelectedColumnChanged(TableColumnDefinition? value)
+    {
+        if (value is null)
+            return;
+
+        SelectedColumnType = value.Type;
     }
 
     [RelayCommand]
@@ -163,6 +208,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
     {
         if (_table is null) return;
 
+        DateTimeEditorControl.CommitActiveEdit();
         SyncGridToModel();
         _table.Name = TableName;
         await _tableService.UpdateTableAsync(_table);
@@ -252,7 +298,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
             foreach (var col in _table.Columns)
             {
                 var value = row.CellValues.GetValueOrDefault(col.Id);
-                dr[col.Id.ToString()] = value ?? DBNull.Value;
+                dr[col.Id.ToString()] = ColumnCellValueConverter.ToDataRowValue(value, col.Type);
             }
 
             _dataTable.Rows.Add(dr);
@@ -276,7 +322,7 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
             foreach (var col in _table.Columns)
             {
                 var val = dr[col.Id.ToString()];
-                row.CellValues[col.Id] = val == DBNull.Value ? null : val;
+                row.CellValues[col.Id] = NormalizeCellValue(val, col.Type);
             }
         }
     }
@@ -315,6 +361,16 @@ public partial class TableEditorViewModel : LocalizedViewModelBase
         ColumnType.Boolean => false,
         _ => string.Empty
     };
+
+    private static object? NormalizeCellValue(object val, ColumnType type)
+    {
+        if (val == DBNull.Value)
+            return null;
+
+        return ColumnCellValueConverter.TryConvert(val, type, out var converted)
+            ? converted
+            : null;
+    }
 
     private static Type GetClrType(ColumnType type) => type switch
     {

@@ -40,7 +40,6 @@ public static class InfrastructureServiceRegistration
 
         services.AddSingleton<IAppSettingsService, JsonAppSettingsService>();
         services.AddSingleton<IWordImportService, WordImportService>();
-        services.AddSingleton<IDesktopNotificationService, WindowsToastNotificationService>();
 
         services.AddQuartz(quartz =>
         {

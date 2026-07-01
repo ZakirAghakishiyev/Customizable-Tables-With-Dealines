@@ -5,15 +5,30 @@
     <UserControl.Resources>
         <conv:ColumnTypeToTextConverter x:Key="ColumnTypeToText" />
         <DataTemplate x:Key="RowActionsTemplate">
-            <StackPanel Orientation="Horizontal">
-                <Button Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
-                        Content="{Binding DataContext.Strings.ManageDeadlines, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Button Style="{StaticResource GridIconButton}"
+                        Margin="0,0,6,0"
+                        ToolTip="{Binding DataContext.Strings.ManageDeadlines, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                         Command="{Binding DataContext.ManageDeadlinesCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                        CommandParameter="{Binding _RowId}" />
-                <Button Style="{StaticResource DangerButton}"
-                        Content="{Binding DataContext.Strings.DeleteRow, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                        CommandParameter="{Binding _RowId}">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#xE787;"
+                               FontSize="14"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+                <Button Style="{StaticResource GridDangerIconButton}"
+                        ToolTip="{Binding DataContext.Strings.DeleteRow, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                         Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                        CommandParameter="{Binding _RowId}" />
+                        CommandParameter="{Binding _RowId}">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#xE74D;"
+                               FontSize="14"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
@@ -35,36 +50,44 @@
         </StackPanel>
 
         <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,12">
-            <StackPanel>
-                <TextBlock Text="{Binding Strings.Columns}" Style="{StaticResource SectionTitle}" />
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                    <Button Content="{Binding Strings.AddColumn}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
-                            Command="{Binding AddColumnCommand}" />
-                    <Button Content="{Binding Strings.RenameColumn}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
-                            Command="{Binding RenameColumnCommand}" />
-                    <Button Content="{Binding Strings.DeleteColumn}" Style="{StaticResource DangerButton}" Margin="0,0,8,0"
-                            Command="{Binding DeleteColumnCommand}" />
-                    <Button Content="{Binding Strings.MoveColumnLeft}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
-                            Command="{Binding MoveColumnLeftCommand}" />
-                    <Button Content="{Binding Strings.MoveColumnRight}" Style="{StaticResource SecondaryButton}" Margin="0,0,16,0"
-                            Command="{Binding MoveColumnRightCommand}" />
-                    <TextBlock Text="{Binding Strings.ColumnType}" VerticalAlignment="Center" Margin="0,0,8,0" />
-                    <ComboBox ItemsSource="{Binding Source={x:Static conv:ColumnTypeValues.All}}"
-                              SelectedItem="{Binding SelectedColumnType}"
-                              Style="{StaticResource ModernComboBox}" Width="140" Margin="0,0,8,0">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Converter={StaticResource ColumnTypeToText}}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <Button Content="{Binding Strings.Edit}" Style="{StaticResource SecondaryButton}"
-                            Command="{Binding ChangeColumnTypeCommand}" />
+            <Expander IsExpanded="True" Background="Transparent" BorderThickness="0">
+                <Expander.Header>
+                    <TextBlock Text="{Binding Strings.Columns}" Style="{StaticResource SectionTitle}" Margin="0" />
+                </Expander.Header>
+                <StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled"
+                                  Margin="0,0,0,12">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="{Binding Strings.AddColumn}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                                    Command="{Binding AddColumnCommand}" />
+                            <Button Content="{Binding Strings.RenameColumn}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                                    Command="{Binding RenameColumnCommand}" />
+                            <Button Content="{Binding Strings.DeleteColumn}" Style="{StaticResource DangerButton}" Margin="0,0,8,0"
+                                    Command="{Binding DeleteColumnCommand}" />
+                            <Button Content="{Binding Strings.MoveColumnLeft}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"
+                                    Command="{Binding MoveColumnLeftCommand}" />
+                            <Button Content="{Binding Strings.MoveColumnRight}" Style="{StaticResource SecondaryButton}" Margin="0,0,16,0"
+                                    Command="{Binding MoveColumnRightCommand}" />
+                            <TextBlock Text="{Binding Strings.ColumnType}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                            <ComboBox ItemsSource="{Binding Source={x:Static conv:ColumnTypeValues.All}}"
+                                      SelectedItem="{Binding SelectedColumnType}"
+                                      Style="{StaticResource ModernComboBox}" Width="140" Margin="0,0,8,0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource ColumnTypeToText}}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Content="{Binding Strings.ApplyColumnType}" Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding ChangeColumnTypeCommand}" />
+                        </StackPanel>
+                    </ScrollViewer>
+                    <ListBox ItemsSource="{Binding Columns}" SelectedItem="{Binding SelectedColumn}"
+                             DisplayMemberPath="Name" MinHeight="60" MaxHeight="100"
+                             HorizontalAlignment="Stretch" />
                 </StackPanel>
-                <ListBox ItemsSource="{Binding Columns}" SelectedItem="{Binding SelectedColumn}"
-                         DisplayMemberPath="Name" MinHeight="60" MaxHeight="100"
-                         HorizontalAlignment="Stretch" />
-            </StackPanel>
+            </Expander>
         </Border>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,12">
@@ -78,8 +101,9 @@
                       HorizontalAlignment="Stretch"
                       HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Auto"
-                      MinColumnWidth="110"
-                      RowHeight="48"
+                      MinColumnWidth="100"
+                      RowHeight="44"
+                      ColumnWidth="*"
                       Margin="0" />
         </Border>
     </Grid>

@@ -25,12 +25,19 @@ public class WpfDesktopNotificationFallback : IDesktopNotificationFallback
         app.Dispatcher.BeginInvoke(() =>
         {
             var window = app.MainWindow;
-            if (window is null)
-                return;
+            if (window is not null)
+            {
+                window.Activate();
+                if (window.WindowState == WindowState.Minimized)
+                    window.WindowState = WindowState.Normal;
+            }
 
-            window.Activate();
-            if (window.WindowState == WindowState.Minimized)
-                window.WindowState = WindowState.Normal;
+            MessageBox.Show(
+                window,
+                message,
+                title,
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
         });
     }
 }

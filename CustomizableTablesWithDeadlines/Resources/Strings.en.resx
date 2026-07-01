@@ -149,4 +149,11 @@
   <data name="SuggestedDeadlineColumns" xml:space="preserve"><value>Suggested Deadline Columns</value></data>
   <data name="SuggestedDeadlineColumnsHint" xml:space="preserve"><value>Date/time columns detected in the document. Select which columns should create row deadlines on import.</value></data>
   <data name="NoDeadlineColumnsDetected" xml:space="preserve"><value>No date/time columns were detected.</value></data>
+  <data name="ColumnTypeChangeBlocked" xml:space="preserve"><value>Cannot change the column type. {0} cell(s) contain values that cannot be converted.</value></data>
+  <data name="ApplyColumnType" xml:space="preserve"><value>Apply type</value></data>
+  <data name="TestNotification" xml:space="preserve"><value>Test notification</value></data>
+  <data name="TestNotificationTitle" xml:space="preserve"><value>Test notification</value></data>
+  <data name="TestNotificationMessage" xml:space="preserve"><value>Desktop notifications are working.</value></data>
+  <data name="TestNotificationSent" xml:space="preserve"><value>Test notification sent. The window was briefly minimized so Windows can show the banner. If you still do not see it, check Windows Focus Assist.</value></data>
+  <data name="TestNotificationFailed" xml:space="preserve"><value>Windows blocked the desktop toast. Enable notifications for this app in Windows Settings, then try again.</value></data>
 </root>

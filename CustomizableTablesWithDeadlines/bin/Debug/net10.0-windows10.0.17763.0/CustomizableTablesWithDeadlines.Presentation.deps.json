@@ -9,6 +9,7 @@
       "CustomizableTablesWithDeadlines.Presentation/1.0.0": {
         "dependencies": {
           "CommunityToolkit.Mvvm": "8.4.2",
+          "CommunityToolkit.WinUI.Notifications": "7.1.2",
           "CustomizableTablesWithDeadlines.Application": "1.0.0",
           "CustomizableTablesWithDeadlines.Infrastructure": "1.0.0",
           "Microsoft.Extensions.Configuration": "10.0.9",

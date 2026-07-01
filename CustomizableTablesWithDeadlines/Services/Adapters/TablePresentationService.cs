@@ -93,6 +93,16 @@ public class TablePresentationService : ITableService
             {
                 await _columns.RenameAsync(new RenameColumnDto { Id = column.Id, Name = column.Name });
             }
+
+            var newDataType = PresentationMapping.ToColumnDataType(column.Type);
+            if (existing.DataType != newDataType)
+            {
+                await _columns.ChangeDataTypeAsync(new ChangeColumnDataTypeDto
+                {
+                    Id = column.Id,
+                    DataType = newDataType
+                });
+            }
         }
 
         var columnsToReorder = table.Columns
@@ -179,7 +189,7 @@ public class TablePresentationService : ITableService
             {
                 RowId = rowId,
                 ColumnId = columnId,
-                DateTimeValue = value as DateTime?
+                DateTimeValue = ToDateTime(value)
             },
             Models.Enums.ColumnType.Boolean => new UpdateCellValueDto
             {
@@ -201,8 +211,15 @@ public class TablePresentationService : ITableService
         object? uiValue) => type switch
     {
         Models.Enums.ColumnType.Number => cell.NumberValue != (uiValue is null ? null : Convert.ToDecimal(uiValue)),
-        Models.Enums.ColumnType.DateTime => cell.DateTimeValue != uiValue as DateTime?,
+        Models.Enums.ColumnType.DateTime => ToDateTime(uiValue) != cell.DateTimeValue,
         Models.Enums.ColumnType.Boolean => cell.BooleanValue != uiValue as bool?,
         _ => !string.Equals(cell.TextValue, uiValue?.ToString(), StringComparison.Ordinal)
+    };
+
+    private static DateTime? ToDateTime(object? value) => value switch
+    {
+        null or DBNull => null,
+        DateTime dt => dt,
+        _ => Convert.ToDateTime(value, System.Globalization.CultureInfo.CurrentCulture)
     };
 }

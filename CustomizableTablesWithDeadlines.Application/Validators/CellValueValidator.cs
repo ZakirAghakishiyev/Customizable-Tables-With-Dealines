@@ -25,8 +25,6 @@ public static class CellValueValidator
                 cell.ValueNumber = dto.NumberValue;
                 break;
             case ColumnDataType.DateTime:
-                if (dto.DateTimeValue is null)
-                    throw new InvalidCellValueException("A date/time value is required for this column.");
                 cell.ValueDateTime = dto.DateTimeValue;
                 break;
             case ColumnDataType.Boolean:

@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CustomizableTablesWithDeadlines.Application.Abstractions.Services;
 using CustomizableTablesWithDeadlines.Models;
 using CustomizableTablesWithDeadlines.Models.Enums;
 using CustomizableTablesWithDeadlines.Services.Interfaces;
@@ -9,6 +10,7 @@ namespace CustomizableTablesWithDeadlines.ViewModels;
 public partial class NotificationSettingsViewModel : LocalizedViewModelBase
 {
     private readonly INotificationSettingsService _settingsService;
+    private readonly IDesktopNotificationService _notificationService;
 
     [ObservableProperty] private NotifyBeforeOption _defaultNotifyBefore = NotifyBeforeOption.OneHour;
     [ObservableProperty] private int _defaultCustomNotifyMinutes = 30;
@@ -20,9 +22,11 @@ public partial class NotificationSettingsViewModel : LocalizedViewModelBase
 
     public NotificationSettingsViewModel(
         ILocalizationService localization,
-        INotificationSettingsService settingsService) : base(localization)
+        INotificationSettingsService settingsService,
+        IDesktopNotificationService notificationService) : base(localization)
     {
         _settingsService = settingsService;
+        _notificationService = notificationService;
     }
 
     public async Task LoadAsync()
@@ -46,6 +50,19 @@ public partial class NotificationSettingsViewModel : LocalizedViewModelBase
             EnableSound = EnableSound,
             StartWithWindows = StartWithWindows
         });
+    }
+
+    [RelayCommand]
+    private async Task TestNotificationAsync()
+    {
+        var shown = await _notificationService.ShowTestNotificationAsync(
+            Strings.TestNotificationTitle,
+            Strings.TestNotificationMessage);
+
+        if (shown)
+            MessageBoxHelper.ShowInfo(Strings.TestNotificationSent);
+        else
+            MessageBoxHelper.ShowWarning(Strings.TestNotificationFailed);
     }
 
     public string GetNotifyOptionText(NotifyBeforeOption option) => Strings.GetNotifyBeforeText(option);

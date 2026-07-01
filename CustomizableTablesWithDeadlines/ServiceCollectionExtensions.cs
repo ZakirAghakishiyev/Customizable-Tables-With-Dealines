@@ -16,6 +16,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<ILocalizationService, LocalizationService>();
         services.AddSingleton<IDesktopNotificationFallback, WpfDesktopNotificationFallback>();
+        services.AddSingleton<IDesktopNotificationService, WpfToastNotificationService>();
         services.AddSingleton<LocalizedStrings>(sp =>
             new LocalizedStrings(sp.GetRequiredService<ILocalizationService>()));
 

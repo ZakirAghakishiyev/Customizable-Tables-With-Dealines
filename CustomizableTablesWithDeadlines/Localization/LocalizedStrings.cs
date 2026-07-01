@@ -118,6 +118,13 @@ public class LocalizedStrings : INotifyPropertyChanged
     public string SuggestedDeadlineColumns => this["SuggestedDeadlineColumns"];
     public string SuggestedDeadlineColumnsHint => this["SuggestedDeadlineColumnsHint"];
     public string NoDeadlineColumnsDetected => this["NoDeadlineColumnsDetected"];
+    public string ColumnTypeChangeBlocked => this["ColumnTypeChangeBlocked"];
+    public string ApplyColumnType => this["ApplyColumnType"];
+    public string TestNotification => this["TestNotification"];
+    public string TestNotificationTitle => this["TestNotificationTitle"];
+    public string TestNotificationMessage => this["TestNotificationMessage"];
+    public string TestNotificationSent => this["TestNotificationSent"];
+    public string TestNotificationFailed => this["TestNotificationFailed"];
 
     public string GetStatusText(Models.Enums.DeadlineStatus status) => status switch
     {

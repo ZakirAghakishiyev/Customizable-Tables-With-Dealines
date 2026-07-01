@@ -69,6 +69,16 @@ public class ColumnService : IColumnService
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task ChangeDataTypeAsync(ChangeColumnDataTypeDto dto, CancellationToken cancellationToken = default)
+    {
+        var column = await _unitOfWork.Columns.GetByIdAsync(dto.Id, cancellationToken)
+                     ?? throw new NotFoundException(nameof(Column), dto.Id);
+
+        column.DataType = dto.DataType;
+        _unitOfWork.Columns.Update(column);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+    }
+
     public async Task DeleteAsync(int columnId, CancellationToken cancellationToken = default)
     {
         var column = await _unitOfWork.Columns.GetByIdAsync(columnId, cancellationToken)

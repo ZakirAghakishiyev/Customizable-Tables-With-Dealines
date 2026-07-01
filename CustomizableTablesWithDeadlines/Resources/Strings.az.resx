@@ -149,4 +149,11 @@
   <data name="SuggestedDeadlineColumns" xml:space="preserve"><value>Təklif olunan son tarix sütunları</value></data>
   <data name="SuggestedDeadlineColumnsHint" xml:space="preserve"><value>Sənəddə tarix/vaxt sütunları aşkar edildi. İdxal zamanı hansı sütunların sətir son tarixləri yaratması lazım olduğunu seçin.</value></data>
   <data name="NoDeadlineColumnsDetected" xml:space="preserve"><value>Heç bir tarix/vaxt sütunu aşkar edilmədi.</value></data>
+  <data name="ColumnTypeChangeBlocked" xml:space="preserve"><value>Sütun növü dəyişdirilə bilməz. {0} xanada çevrilə bilməyən dəyərlər var.</value></data>
+  <data name="ApplyColumnType" xml:space="preserve"><value>Növü tətbiq et</value></data>
+  <data name="TestNotification" xml:space="preserve"><value>Bildirişi yoxla</value></data>
+  <data name="TestNotificationTitle" xml:space="preserve"><value>Test bildirişi</value></data>
+  <data name="TestNotificationMessage" xml:space="preserve"><value>Masaüstü bildirişləri işləyir.</value></data>
+  <data name="TestNotificationSent" xml:space="preserve"><value>Test bildirişi göndərildi. Pəncərə bir anlıq kiçildildi ki, Windows banneri göstərə bilsin. Əgər yenə də görmürsünüzsə, Windows Fokus rejimini yoxlayın.</value></data>
+  <data name="TestNotificationFailed" xml:space="preserve"><value>Windows masaüstü bildirişini blokladı. Windows Parametrlərində bu tətbiq üçün bildirişləri aktiv edin və yenidən cəhd edin.</value></data>
 </root>
